@@ -66,7 +66,12 @@
                 "singularity_pull_docker_container": {
                     "type": "boolean",
                     "description": "Pull Singularity container from Docker?",
-                    "hidden": true
+                    "hidden": false
+                },
+                "singularity_use_local_file": {
+                    "type": "boolean",
+                    "description": "Use SIF image from the file storage",
+                    "hidden": false
                 },
                 "publish_dir_mode": {
                     "type": "string",

@@ -1,10 +1,15 @@
+
+//-- * Example: https://github.com/nf-core/sarek/blob/5cc30494a6b8e7e53be64d308b582190ca7d2585/modules/nf-core/gawk/main.nf#L6
 process generateConformer{
 
     publishDir "${params.outDir}/stage1_generate_conformers", mode: 'copy', overwrite: true
+    // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
+    //         ${params.singularity_local_container} :
+    //         'biocontainers/gawk:5.3.0' }"
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/gawk:5.3.0' :
-        'biocontainers/gawk:5.3.0' }"
+    container "${params.singularity_use_local_file}"
+
+    label "process_low"
 
 
     input:
@@ -17,7 +22,7 @@ process generateConformer{
     script:
         def i_version=1
     """
-        ${params.scripts_folder ?: "/pro/hpc" }/pocketome/helper/stage7_struct_clean.icm -v=yes -i=${struct_file} -iseq=${sequence_file} -o=${struct_file.simpleName}_tab.csv
+        echo ${id}
     """
 }
 

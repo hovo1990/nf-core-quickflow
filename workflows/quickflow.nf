@@ -40,7 +40,7 @@ workflow QUICKFLOW {
 
 
     //-- * Stage 1: Prepare conformers and save xyz
-
+    conformers = generateConformer(ch_compounds_input)
 
     //-- * Stage 2: Prepend parameters for quick
 
