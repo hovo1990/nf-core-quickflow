@@ -81,6 +81,11 @@ nextflow run main.nf \
    -profile singularity \
    --input test_data/compounds.csv \
    --outdir ./testOut
+
+
+nextflow run main.nf \
+   -profile singularity \
+   -params-file test_data/config.yml
 ----
 
 
