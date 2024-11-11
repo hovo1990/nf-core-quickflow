@@ -78,6 +78,7 @@ RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest  | tar -xvj b
 RUN $MAMBA create -n $ENV_NAME -c conda-forge --yes \
     'python==3.11' \
     'numba' \
+    'click' \
     'python-graphviz' \
     'pandas' \
     'matplotlib' \
