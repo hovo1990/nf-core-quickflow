@@ -15,6 +15,9 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quic
 //-- * Custom modules
 include { generateConformer } from '../modules/local/generate_conformer'
 
+include { prepareInput } from '../modules/local/prepare_input'
+
+
 
 
 
@@ -43,6 +46,7 @@ workflow QUICKFLOW {
     conformers = generateConformer(ch_compounds_input)
 
     //-- * Stage 2: Prepend parameters for quick
+    preped_input = prepareInput(conformers)
 
 
     //-- * Stage 3: Processing

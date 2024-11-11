@@ -91,6 +91,14 @@ nextflow run main.nf \
    -profile singularity \
    -params-file test_data/config.yml \
    -with-singularity true
+
+
+nextflow run main.nf \
+   -resume \
+   -profile singularity \
+   -params-file test_data/config.yml \
+   -with-singularity true
+
 ----
 
 
