@@ -19,6 +19,8 @@ from loguru import logger
 import click
 import openbabel
 
+from openbabel import openbabel, pybel
+
 def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
     def wrapper(func):
         name = func.__name__
@@ -76,38 +78,40 @@ def validate_xyz(ctx, param, value):
 )
 @click.option(
     "--output",
-    help="Output selected table to a bsv file",
+    help="Output generated conformer to xyz file",
     callback=validate_xyz,
     required=True,
 )
-def start_program(input, output):
+def start_program(id, name,smiles, output):
     test = 1
 
     logger.info(" Info>  id {}".format(input))
+    logger.info(" Info>  smiles {}".format(smiles))
+    logger.info(" Info>  name {}".format(name))
     logger.info(" Info>  output file {}".format(output))
 
-    # # test = 1
+    # quit(1)
+    
+    try:
+        #-- * Create an OBMol (Open Babel molecule) from the SMILES string
+        obConversion = openbabel.OBConversion()
+        obConversion.SetInAndOutFormats("smi", "xyz")
 
-    # csv_df = pd.read_csv(input, header=None)
-    # # print(csv_df)
+        mol = openbabel.OBMol()
+        obConversion.ReadString(mol, smiles)
 
-    # try:
-    #     full_list = []
-    #     for i in csv_df[0]:
-    #         # print(i)
-    #         temp_df = pd.read_csv(i)
-    #         # print(temp_df)
-    #         full_list.append(temp_df)
+        #-- * Add hydrogen atoms and optimize the 3D geometry
+        mol.AddHydrogens()
+        obConversion.SetOutFormat("xyz")  # Set the output format
+        pybel.Molecule(mol).make3D()  # Use pybel's make3D function to optimize
 
-    #     final_df = pd.concat(full_list)
-    #     final_df.reset_index(inplace=True, drop=True)
-
-    #     final_df.to_csv(output, index=False)
-    #     # print(final_df)
-    #     exit(0)
-    # except Exception as e:
-    #     logger.warning(" Error> Unable to save csv file {}".format(e))
-    #     exit(1)
+        #-- * Export the molecule to a file
+        output_filename = output
+        obConversion.WriteFile(mol, output_filename)
+        exit(0)
+    except Exception as e:
+        logger.warning(" Error> Unable to save xyz file {}".format(e))
+        exit(1)
 
 
 if __name__ == "__main__":
