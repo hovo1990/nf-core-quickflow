@@ -52,7 +52,8 @@ workflow {
     main:
     // println("Hello world")
 
-
+    println " Info> Script directory path: ${projectDir}"
+    println " Info> Launch directory path: ${launchDir}"
 
     //
     // SUBWORKFLOW: Run initialisation tasks

@@ -2,4 +2,4 @@ input: /home/hovakim/GitSync/main/nf-core-quickflow/test_data/compounds.csv
 outdir: /home/hovakim/GitSync/main/nf-core-quickflow/testOut
 
 
-singularity_container: /home/hovakim/GitSync/quick.sif
+singularity_local_container: /home/hovakim/GitSync/quick.sif

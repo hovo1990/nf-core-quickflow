@@ -12,6 +12,11 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quic
 
 
 
+//-- * Custom modules
+include { generateConformer } from '../modules/local/generate_conformer'
+
+
+
 
 
 /*
@@ -34,7 +39,13 @@ workflow QUICKFLOW {
 
 
 
-    //-- * Stage 1: Prepare conformers
+    //-- * Stage 1: Prepare conformers and save xyz
+
+
+    //-- * Stage 2: Prepend parameters for quick
+
+
+    //-- * Stage 3: Processing
 
 
     //
