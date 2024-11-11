@@ -18,6 +18,8 @@ include { generateConformer } from '../modules/local/generate_conformer'
 include { prepareInput } from '../modules/local/prepare_input'
 
 
+include { quickGPU } from '../modules/local/quick'
+
 
 
 
@@ -49,7 +51,8 @@ workflow QUICKFLOW {
     preped_input = prepareInput(conformers)
 
 
-    //-- * Stage 3: Processing
+    //-- * Stage 3: Quick Calculation
+    quick_out = quickGPU(preped_input)
 
 
     //
