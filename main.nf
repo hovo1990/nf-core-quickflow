@@ -15,7 +15,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-// include { QUICKFLOW  } from './workflows/quickflow'
+include { QUICKFLOW  } from './workflows/quickflow'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_quickflow_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_quickflow_pipeline'
 /*
@@ -30,7 +30,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_quic
 workflow NFCORE_QUICKFLOW {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    compounds_input // channel: compounds_input read in from --input
 
     main:
 
@@ -38,7 +38,7 @@ workflow NFCORE_QUICKFLOW {
     // WORKFLOW: Run pipeline
     //
     QUICKFLOW (
-        samplesheet
+        compounds_input
     )
 }
 /*
@@ -50,7 +50,7 @@ workflow NFCORE_QUICKFLOW {
 workflow {
 
     main:
-    println("Hello world")
+    // println("Hello world")
 
 
 
@@ -69,9 +69,9 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    // NFCORE_QUICKFLOW (
-    //     PIPELINE_INITIALISATION.out.samplesheet
-    // )
+    NFCORE_QUICKFLOW (
+        PIPELINE_INITIALISATION.out.samplesheet
+    )
 
 
 

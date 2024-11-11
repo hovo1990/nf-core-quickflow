@@ -19,11 +19,12 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quic
 workflow QUICKFLOW {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_compounds_input // channel: ch_compounds_input read in from --input
     main:
 
     ch_versions = Channel.empty()
     
+    println("Hello world!!!!!!")
 
     //
     // Collate and save software versions
