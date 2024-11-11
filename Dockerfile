@@ -79,6 +79,8 @@ RUN $MAMBA create -n $ENV_NAME -c conda-forge --yes \
     'python==3.11' \
     'numba' \
     'click' \
+    'tqdm' \
+    'loguru' \
     'python-graphviz' \
     'pandas' \
     'matplotlib' \
