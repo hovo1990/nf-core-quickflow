@@ -7,7 +7,9 @@ process generateConformer{
     //         ${params.singularity_local_container} :
     //         'biocontainers/gawk:5.3.0' }"
 
-    container "${params.singularity_use_local_file}"
+    // container "/home/hovakim/GitSync/quick.sif"
+    container "${params.singularity_local_container}"
+
 
     label "process_low"
 
