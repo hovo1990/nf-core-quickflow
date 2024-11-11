@@ -71,5 +71,8 @@ nextflow run main.nf
 [source, bash]
 ----
 
-
+nextflow run main.nf \
+   -profile singularity \
+   --input test_data/samplesheet.csv \
+   --outdir ./testOut
 ----
