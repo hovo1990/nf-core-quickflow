@@ -10,8 +10,7 @@
             "ID": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Chemical ID missing",
-                "meta": ["id"]
+                "errorMessage": "Chemical ID missing"
             },
             "SMILES": {
                 "type": "string",

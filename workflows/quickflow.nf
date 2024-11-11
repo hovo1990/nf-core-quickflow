@@ -10,6 +10,10 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quickflow_pipeline'
 
+
+
+
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -25,6 +29,13 @@ workflow QUICKFLOW {
     ch_versions = Channel.empty()
     
     println("Hello world!!!!!!")
+
+    ch_compounds_input.view()
+
+
+
+    //-- * Stage 1: Prepare conformers
+
 
     //
     // Collate and save software versions
