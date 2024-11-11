@@ -63,3 +63,13 @@ pip install nf-core
 
 nextflow run main.nf
 ----
+
+
+
+= How to really run?
+
+[source, bash]
+----
+
+
+----
