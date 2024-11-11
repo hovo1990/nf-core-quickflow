@@ -75,4 +75,12 @@ nextflow run main.nf \
    -profile singularity \
    --input test_data/samplesheet.csv \
    --outdir ./testOut
+
+
+nextflow run main.nf \
+   -profile singularity \
+   --input test_data/compounds.csv \
+   --outdir ./testOut
 ----
+
+

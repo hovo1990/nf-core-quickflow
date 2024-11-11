@@ -7,27 +7,23 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "ID": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "errorMessage": "Chemical ID missing",
                 "meta": ["id"]
             },
-            "fastq_1": {
+            "SMILES": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^([BCNOFPSIbcnofps#@+\/-\/[\/]\/(\/)\\\/%=0-9]+)$",
+                "errorMessage": "Chemical structure must be in smiles format"
             },
-            "fastq_2": {
+            "NAME": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+$",
+                "errorMessage": "Name of the Chemical Structre"
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["ID", "SMILES","NAME"]
     }
 }
