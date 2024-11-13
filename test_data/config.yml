@@ -5,3 +5,9 @@ outdir: /home/hovakim/GitSync/main/nf-core-quickflow/testOut
 singularity_local_container: /home/hovakim/GitSync/quick.sif
 singularity_use_local_file: true
 singularity_pull_docker_container: false
+
+
+# method: DFT
+# basis: 6G
+# optimize: true/false
+# export_molden: true/false

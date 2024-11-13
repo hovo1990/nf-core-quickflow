@@ -59,14 +59,22 @@ workflow QUICKFLOW {
     //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
     //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
     //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
+    //-- ? GPU enabled by default, if not run on CPU
     quick_out = quickGPU(preped_input)
     quick_out.view()
 
-    //-- * Stage 4: Validate calculation 
 
-    //-- * Stage 5: Generate report 
 
-    //-- * Stage 6: Generate  QCSchema
+    //-- * Stage 4: Validate calculation output files
+    //-- * fake smiles that cause error: Normal Termination. water, limit iteration.
+    //-- * cutoff=1.0e-6 denserms=1.0e-8  it won't converge
+
+    //-- * Stage 5: Generate report, html file view, dashboard, summary of jobs, parameter input, 
+    //-- * What jobs were exectured, how long it took, statistics, resource usage, if available
+    //-- ? qcengine 
+    //-- ? https://github.com/SCM-NV/qmflows/tree/master/src/qmflows/examples
+
+    //-- * Stage 6: Generate  QCSchema, fortran or c++ 
     //-- ? Resource: https://github.com/MolSSI/QCSchema
     //-- ? Resource: https://molssi-qc-schema.readthedocs.io/en/latest/index.html#
 
