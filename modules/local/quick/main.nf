@@ -7,8 +7,18 @@ process quickGPU{
     //         'biocontainers/gawk:5.3.0' }"
 
     // container "/home/hovakim/GitSync/quick.sif"
-    container "${params.singularity_local_container}"
-    containerOptions " --nv"
+
+    if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
+        container "${params.singularity_local_container}"
+        containerOptions " --nv"
+    }
+    else {
+        container "${params.container_link}"
+    }
+
+
+    // container "${params.singularity_local_container}"
+    // containerOptions " --nv"
 
     label "process_gpu"
 

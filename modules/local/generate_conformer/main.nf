@@ -8,7 +8,15 @@ process generateConformer{
     //         'biocontainers/gawk:5.3.0' }"
 
     // container "/home/hovakim/GitSync/quick.sif"
-    container "${params.singularity_local_container}"
+    
+    if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
+        container "${params.singularity_local_container}"
+        containerOptions " --nv"
+    }
+    else {
+        container "${params.container_link}"
+    }
+
 
 
     label "process_low"

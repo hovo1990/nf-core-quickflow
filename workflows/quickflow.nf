@@ -22,7 +22,7 @@ include { quickGPU } from '../modules/local/quick'
 
 
 
-
+params.container_link = "biocontainers/gawk:5.3.0"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
