@@ -66,7 +66,9 @@ workflow QUICKFLOW {
 
     //-- * Stage 5: Generate report 
 
-    //-- * Stage 6: Generate QSSchema  compatible output
+    //-- * Stage 6: Generate  QCSchema
+    //-- ? Resource: https://github.com/MolSSI/QCSchema
+    //-- ? Resource: https://molssi-qc-schema.readthedocs.io/en/latest/index.html#
 
     //-- * Stage 7: Generate DeePMD compatible output
 
