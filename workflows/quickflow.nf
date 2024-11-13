@@ -55,6 +55,16 @@ workflow QUICKFLOW {
     quick_out = quickGPU(preped_input)
 
 
+    //-- * Stage 4: Validate calculation 
+
+    //-- * Stage 5: Generate report 
+
+    //-- * Stage 6: Generate QSSchema  compatible output
+
+    //-- * Stage 7: Generate DeePMD compatible output
+
+
+
     //
     // Collate and save software versions
     //
