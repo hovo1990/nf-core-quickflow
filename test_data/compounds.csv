@@ -3,5 +3,7 @@ CID702,CCO,Ethanol
 CID887,CO,Methanol
 CID3776,CC(C)O,Isopropyl
 CID2244,CC(=O)OC1=CC=CC=C1C(=O)O,Aspirin
+C1,CCC,Cust1
+C2,CCCC,Cust2
 
 
