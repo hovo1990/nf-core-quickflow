@@ -27,7 +27,7 @@ process quickGPU{
         path(input)
 
     output:
-        path("${input.simpleName}.out")
+        tuple path("${input.simpleName}.out"), path("${input.simpleName}.molden")
 
 
     script:

@@ -28,6 +28,9 @@ singularity build quick.sif docker-daemon://quick:latest
 
 singularity run --nv /home/hovakim/GitSync/quick.sif 
 
+
+singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test2.in
+
 singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test3.in
 singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test4.in
 
