@@ -58,8 +58,9 @@ workflow QUICKFLOW {
     //-- * Stage 3: Quick Calculation
     //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
     //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
+    //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
     quick_out = quickGPU(preped_input)
-
+    quick_out.view()
 
     //-- * Stage 4: Validate calculation 
 
