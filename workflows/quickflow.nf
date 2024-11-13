@@ -52,6 +52,7 @@ workflow QUICKFLOW {
     conformers = generateConformer(ch_compounds_input)
 
     //-- * Stage 2: Prepend parameters for quick
+    //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
     preped_input = prepareInput(conformers)
 
 
