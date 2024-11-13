@@ -4,6 +4,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+params.container_link = "biocontainers/gawk:5.3.0"
+
+
+
+
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 
@@ -22,7 +27,6 @@ include { quickGPU } from '../modules/local/quick'
 
 
 
-params.container_link = "biocontainers/gawk:5.3.0"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,6 +56,8 @@ workflow QUICKFLOW {
 
 
     //-- * Stage 3: Quick Calculation
+    //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
+    //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
     quick_out = quickGPU(preped_input)
 
 
