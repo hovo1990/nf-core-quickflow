@@ -79,6 +79,8 @@ workflow QUICKFLOW {
         // quick_out.view()
     } 
     else {
+        //-- ! Gives segmentation fault, really
+        //-- TODO discuss with Andy
         quick_out = quickCPU(preped_input)
     }
 

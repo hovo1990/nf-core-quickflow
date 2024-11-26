@@ -73,6 +73,7 @@ process quickCPU{
     script:
         def i_version=1
     """
-        mpirun -np ${task.cpus} --bind-to core quick.MPI ${input}
+        #mpirun -np ${task.cpus} --bind-to core quick.MPI ${input}
+        quick ${input}
     """
 }
