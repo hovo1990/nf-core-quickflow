@@ -74,6 +74,7 @@ workflow QUICKFLOW {
     // //-- ? GPU enabled by default, if not run on CPU
 
 
+    //-- TODO add QCSchema export in quick
     if ( params.useGPU ) {
         quick_out = quickGPU(preped_input)
         // quick_out.view()
@@ -83,6 +84,8 @@ workflow QUICKFLOW {
         //-- TODO discuss with Andy
         quick_out = quickCPU(preped_input)
     }
+
+
 
 
 
