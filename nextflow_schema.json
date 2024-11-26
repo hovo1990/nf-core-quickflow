@@ -156,6 +156,12 @@
                     "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
                     "hidden": true
                 },
+                "useGPU": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Use NVIDIA GPUs for calculation",
+                    "hidden": false
+                },
                 "singularity_pull_docker_container": {
                     "type": "boolean",
                     "default": true,

@@ -7,6 +7,8 @@ singularity_use_local_file: true
 singularity_pull_docker_container: false
 
 
+useGPU: false
+
 # basis: "STO-3G"
 # basis: "6-311+G(2d,p)"
 

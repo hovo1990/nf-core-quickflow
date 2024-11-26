@@ -28,6 +28,7 @@ include { prepareInput } from '../modules/local/prepare_input'
 
 include { quickGPU } from '../modules/local/quick'
 
+include { quickCPU } from '../modules/local/quick'
 
 
 
@@ -71,8 +72,15 @@ workflow QUICKFLOW {
     // //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
     // //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
     // //-- ? GPU enabled by default, if not run on CPU
-    quick_out = quickGPU(preped_input)
-    // quick_out.view()
+
+
+    if ( params.useGPU ) {
+        quick_out = quickGPU(preped_input)
+        // quick_out.view()
+    } 
+    else {
+        quick_out = quickCPU(preped_input)
+    }
 
 
 
