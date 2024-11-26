@@ -8,6 +8,7 @@ Details on some of the trade-offs involved are outlined in ‘Fast, efficient fr
 
 """
 
+
 import math
 import os
 import pathlib
@@ -74,39 +75,110 @@ def timeit(func):
     required=True,
     type=str,
 )
+
 @click.option(
-    "--libxc_bp86",
-    help="libxc_bp86",
+    "--scf_cutoff",
+    help="scf_cutoff",
+    required=True,
+    type=str,
+)
+@click.option(
+    "--scf_denserms",
+    help="scf_denserms",
+    required=True,
+    type=str,
+)
+
+@click.option(
+    "--charge",
+    help="charge",
+    required=True,
+    type=int,
+)
+@click.option(
+    "--mult",
+    help="mult",
+    required=True,
+    type=int,
+)
+@click.option(
+    "--gradient",
+    help="gradient",
     required=True,
     type=bool
 )
-def start_program(hamiltonian,dft_method,basis,libxc_bp86):
+@click.option(
+    "--dipole",
+    help="dipole",
+    required=True,
+    type=bool
+)
+@click.option(
+    "--optimize",
+    help="optimize",
+    required=True,
+    type=bool
+)
+@click.option(
+    "--export",
+    help="export",
+    required=True,
+    type=str,
+)
+def start_program(hamiltonian,dft_method,basis,
+                scf_cutoff,scf_denserms,
+                charge,
+                mult,
+                gradient,
+                dipole,
+                optimize,
+                export     
+):
     test = 1
 
-    logger.info(" Info>  hamiltonian {}".format(hamiltonian))
-    logger.info(" Info>  dft_method {}".format(dft_method))
-    logger.info(" Info>  basis {}".format(basis))
-    logger.info(" Info>  libxc_bp86 {}".format(libxc_bp86))
+    logger.debug(" Info>  hamiltonian {}".format(hamiltonian))
+    logger.debug(" Info>  dft_method {}".format(dft_method))
+    logger.debug(" Info>  basis {}".format(basis))
+    logger.debug(" Info>  scf_cutoff {}".format(scf_cutoff))
+    logger.debug(" Info> scf_denserms {}".format(scf_denserms))
+    logger.debug(" Info>  charge {}".format(charge))
+    logger.debug(" Info>  mult {}".format(mult))
+    logger.debug(" Info>  gradient {}".format(gradient))
+    logger.debug(" Info>  dipole {}".format(dipole))
+    logger.debug(" Info>  optimize {}".format(optimize))
+    logger.debug(" Info>  export {}".format(export))
 
 
-    quit(251)
+    # quit(251)
     
     try:
-        #-- * Create an OBMol (Open Babel molecule) from the SMILES string
-        obConversion = openbabel.OBConversion()
-        obConversion.SetInAndOutFormats("smi", "xyz")
-
-        mol = openbabel.OBMol()
-        obConversion.ReadString(mol, smiles)
-
-        #-- * Add hydrogen atoms and optimize the 3D geometry
-        mol.AddHydrogens()
-        obConversion.SetOutFormat("xyz")  # Set the output format
-        pybel.Molecule(mol).make3D()  # Use pybel's make3D function to optimize
-
-        #-- * Export the molecule to a file
-        output_filename = output
-        obConversion.WriteFile(mol, output_filename)
+        #-- * start creating Quick settings for the compounds
+        mainArg = ''
+        mainArg += hamiltonian + " "
+        if hamiltonian == 'DFT' or hamiltonian =="UDFT":
+            mainArg += dft_method + " "
+            
+        mainArg += basis + " "
+        mainArg += "cutoff=" + scf_cutoff + " "
+        mainArg += "denserms=" + scf_denserms + " "
+        
+        mainArg += "CHARGE=" + str(charge) + " "
+        mainArg += "MULT=" + str(mult) + " "
+        
+        if gradient is True:
+            mainArg += "GRADIENT" + " "
+        
+        if dipole is True:
+            mainArg += "DIPOLE" + " "
+            
+        if optimize is True:
+            mainArg += "OPTIMIZE" + " "
+        
+        if export is not None:
+            mainArg += "EXPORT=" + str(export) + " "
+        
+        logger.debug(" Info>  mainArg ->  {}".format(mainArg))
+        sys.stdout.write("Hello world")
         exit(0)
     except Exception as e:
         logger.warning(" Error> Unable to save xyz file {}".format(e))
