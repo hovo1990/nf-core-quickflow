@@ -289,7 +289,7 @@
                     "default": false,
                     "hidden": false
                 },
-                
+
                 "scf_cutoff": {
                     "type": "string",
                     "description": "user defined integral cutoff. Default : 1.0E-7",
@@ -302,12 +302,46 @@
                     "default": "1.0e-6",
                     "hidden": false
                 },
+                "charge":{
+                    "type": "integer",
+                    "description": "A net charge is to be placed on system. Default: 0",
+                    "default": 0,
+                    "hidden": false
+                },
+                "mult":{
+                    "type": "integer",
+                    "description": "Spin multiplicity of the system. Default: 1",
+                    "default": 1,
+                    "hidden": false
+                },
+                "dipole": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Write dipole moments, Mulliken and Löwdin charges into the output file.",
+                    "hidden": false
+                },
                 "gradient": {
                     "type": "boolean",
                     "default": true,
                     "description": "Calculates analytical gradients.",
                     "hidden": false
-                }
+                },
+                "optimize": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Performs a geometry optimization.",
+                    "hidden": false
+                },
+                "export": {
+                    "type": "string",
+                    "description": "Generates a molden file that contains orbitals, charges, geometries, etc.",
+                    "default": "MOLDEN",
+                    "enum": [
+                        "MOLDEN"
+                            ],
+                    "hidden": false
+                },
+
             }
         }
     },
