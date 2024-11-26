@@ -29,9 +29,16 @@ process generateSettings{
     script:
         def i_version=1
         def hamiltonian = "${params.hamiltonian}"
-        def dft_method = ${params.dft_method}
-        
+        def dft_method = "${params.dft_method}"
+        def basis = "${params.basis}"
+        def libxc_bp86 = "${params.libxc_BP86}"
+
     """
-        python ${projectDir}/bin/generateSettings.py   --hamiltonian=${hamiltonian} 
+        python ${projectDir}/bin/generateSettings.py   --hamiltonian="${hamiltonian}" \
+                                                        --dft_method="${dft_method}" \
+                                                        --basis="${basis}" \
+                                                        --libxc_bp86="${libxc_bp86}"
+
+
     """
 }

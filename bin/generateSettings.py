@@ -60,24 +60,36 @@ def timeit(func):
     "--hamiltonian",
     help="hamiltonian for the calculation",
     required=True,
+    type=str,
 )
-# @click.option(
-#     "--name",
-#     help="compound name",
-#     required=True,
-# )
-# @click.option(
-#     "--smiles",
-#     help="compound smiles",
-#     required=True,
-# )
-def start_program(hamiltonian):
+@click.option(
+    "--dft_method",
+    help="dft method",
+    required=True,
+    type=str
+)
+@click.option(
+    "--basis",
+    help="basis",
+    required=True,
+    type=str,
+)
+@click.option(
+    "--libxc_bp86",
+    help="libxc_bp86",
+    required=True,
+    type=bool
+)
+def start_program(hamiltonian,dft_method,basis,libxc_bp86):
     test = 1
 
     logger.info(" Info>  hamiltonian {}".format(hamiltonian))
+    logger.info(" Info>  dft_method {}".format(dft_method))
+    logger.info(" Info>  basis {}".format(basis))
+    logger.info(" Info>  libxc_bp86 {}".format(libxc_bp86))
 
 
-    quit(1)
+    quit(251)
     
     try:
         #-- * Create an OBMol (Open Babel molecule) from the SMILES string

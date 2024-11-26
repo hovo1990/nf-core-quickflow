@@ -247,7 +247,7 @@
                     "default": false,
                     "hidden": false
                 },
-                "libxc_B97-GGA1": {
+                "libxc_B97_GGA1": {
                     "type": "boolean",
                     "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
                     "default": false,
