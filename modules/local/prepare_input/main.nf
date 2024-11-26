@@ -27,7 +27,7 @@ process prepareInput{
 
 
     script:
-        def i_version=2
+        def i_version=4
     """
         cp ${input} ${input.simpleName}_prep.xyz
         sed -i '1s/.*/DFT B3LYP BASIS=${params.basis} cutoff=1.0e-10 denserms=1.0e-6  zmake GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN/' ${input.simpleName}_prep.xyz 
