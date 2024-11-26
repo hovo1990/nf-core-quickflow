@@ -140,7 +140,7 @@
                     "description": "Incoming hook URL for messaging service",
                     "fa_icon": "fas fa-people-group",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
-                    "hidden": true
+                    "inhidden": true
                 },
                 "validate_params": {
                     "type": "boolean",
@@ -233,6 +233,24 @@
                         "BLYP",
                         "B3LYP"
                             ],
+                    "hidden": false
+                },
+                "scf_cutoff": {
+                    "type": "string",
+                    "description": "user defined integral cutoff. Default : 1.0E-7",
+                    "default": "1.0e-10",
+                    "hidden": false
+                },
+                "scf_denserms": {
+                    "type": "string",
+                    "description": "user defined density matrix maximum RMS for convergence. Default : 1.0E-6.",
+                    "default": "1.0e-6",
+                    "hidden": false
+                },
+                "gradient": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Calculates analytical gradients.",
                     "hidden": false
                 }
             }
