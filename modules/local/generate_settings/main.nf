@@ -44,6 +44,14 @@ process generateSettings{
         def scf_cutoff= "${params.scf_cutoff}"
         def scf_denserms ="${params.scf_denserms}"
 
+        def charge="${params.charge}"
+        def mult="${params.mult}"
+
+        def gradient="${params.gradient}"
+        def dipole ="${params.dipole}"
+        def optimize="${params.optimize}"
+        def export ="${params.export}"
+
     """
         python ${projectDir}/bin/generateSettings.py   --hamiltonian="${hamiltonian}" \
                                                         --dft_method="${dft_method}" \
@@ -57,7 +65,14 @@ process generateSettings{
                                                         --libxc_revpbe="${libxc_revpbe}" \
                                                         --libxc_pbe0="${libxc_pbe0}" \
                                                         --scf_cutoff="${scf_cutoff}" \
-                                                        --scf_denserms="${scf_denserms}"
+                                                        --scf_denserms="${scf_denserms}" \
+                                                        --charge="${charge}" \
+                                                        --mult="${mult}" \
+                                                        --gradient="${gradient}" \
+                                                        --dipole="${dipole}" \
+                                                        --optimize="${optimize}" \
+                                                        --export="${export}"
+
 
 
 
