@@ -30,6 +30,6 @@ process prepareInput{
         def i_version=2
     """
         cp ${input} ${input.simpleName}_prep.xyz
-        sed -i '1s/.*/DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  zmake GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN/' ${input.simpleName}_prep.xyz 
+        sed -i '1s/.*/DFT B3LYP BASIS=${params.basis} cutoff=1.0e-10 denserms=1.0e-6  zmake GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN/' ${input.simpleName}_prep.xyz 
     """
 }

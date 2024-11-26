@@ -165,6 +165,13 @@
                     "type": "boolean",
                     "description": "Use SIF image from the file storage",
                     "hidden": false
+                },
+                "basis": {
+                    "type": "string",
+                    "description": "Use SIF image from the file storage",
+                    "default": "6-311+G(2d,p)",
+                    "enum": ["6-311+G(2d,p)", "STO-3G"],
+                    "hidden": false
                 }
             }
         }

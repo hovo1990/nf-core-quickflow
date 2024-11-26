@@ -7,6 +7,10 @@ singularity_use_local_file: true
 singularity_pull_docker_container: false
 
 
+# basis: "6-311+G(2d,p)"
+
+basis: "STO-3G"
+
 # method: DFT
 # basis: 6G
 # optimize: true/false
