@@ -20,6 +20,9 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quic
 //-- * Custom modules
 include { generateConformer } from '../modules/local/generate_conformer'
 
+include { generateSettings } from '../modules/local/generate_settings'
+
+
 include { prepareInput } from '../modules/local/prepare_input'
 
 
@@ -51,18 +54,24 @@ workflow QUICKFLOW {
     //-- * Stage 1: Prepare conformers and save xyz
     conformers = generateConformer(ch_compounds_input)
 
-    //-- * Stage 2: Prepend parameters for quick
+    //-- * Stage 2: generate settings command line
+    settings = generateSettings()
+
+    //-- * Stage 3: Prepend parameters for quick
     //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
-    preped_input = prepareInput(conformers)
+    
+    to_do = conformers.combine(settings)
+    to_do.view()
+    // preped_input = prepareInput(todo)
 
 
-    //-- * Stage 3: Quick Calculation
-    //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
-    //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
-    //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
-    //-- ? GPU enabled by default, if not run on CPU
-    quick_out = quickGPU(preped_input)
-    quick_out.view()
+    // //-- * Stage 4: Quick Calculation
+    // //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
+    // //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
+    // //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
+    // //-- ? GPU enabled by default, if not run on CPU
+    // quick_out = quickGPU(preped_input)
+    // quick_out.view()
 
 
 

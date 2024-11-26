@@ -235,6 +235,61 @@
                             ],
                     "hidden": false
                 },
+                "libxc_BP86": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_B97": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_B97-GGA1": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_PW91": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_OLYP": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_O3LYP": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_PBE": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_REVPBE": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                "libxc_PBE0": {
+                    "type": "boolean",
+                    "description": "Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4).",
+                    "default": false,
+                    "hidden": false
+                },
+                
                 "scf_cutoff": {
                     "type": "string",
                     "description": "user defined integral cutoff. Default : 1.0E-7",
