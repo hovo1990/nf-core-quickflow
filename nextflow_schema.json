@@ -158,11 +158,13 @@
                 },
                 "singularity_pull_docker_container": {
                     "type": "boolean",
+                    "default": true,
                     "description": "Pull Singularity container from Docker or not",
                     "hidden": false
                 },
                 "singularity_use_local_file": {
                     "type": "boolean",
+                    "default": false,
                     "description": "Use SIF image from the file storage",
                     "hidden": false
                 },
