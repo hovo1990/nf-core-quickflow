@@ -155,6 +155,16 @@
                     "description": "Base URL or local path to location of pipeline test dataset files",
                     "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
                     "hidden": true
+                },
+                "singularity_pull_docker_container": {
+                    "type": "boolean",
+                    "description": "Pull Singularity container from Docker or not",
+                    "hidden": false
+                },
+                "singularity_use_local_file": {
+                    "type": "boolean",
+                    "description": "Use SIF image from the file storage",
+                    "hidden": false
                 }
             }
         }
