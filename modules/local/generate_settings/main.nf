@@ -27,7 +27,7 @@ process generateSettings{
 
 
     script:
-        def i_version=1
+        def i_version=2
         def hamiltonian = "${params.hamiltonian}"
         def dft_method = "${params.dft_method}"
         def basis = "${params.basis}"

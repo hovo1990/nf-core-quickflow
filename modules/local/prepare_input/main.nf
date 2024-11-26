@@ -20,7 +20,7 @@ process prepareInput{
 
 
     input:
-        path(input)
+        tuple path(input), val(mainArg)
 
     output:
         path("${input.simpleName}_prep.xyz")
@@ -30,6 +30,6 @@ process prepareInput{
         def i_version=4
     """
         cp ${input} ${input.simpleName}_prep.xyz
-        sed -i '1s/.*/${params.hamiltonian} ${params.dft_method} BASIS=${params.basis} cutoff=${params.scf_cutoff} denserms=${params.scf_denserms}  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN/' ${input.simpleName}_prep.xyz 
+        sed -i '1s/.*/${mainArg}/' ${input.simpleName}_prep.xyz 
     """
 }

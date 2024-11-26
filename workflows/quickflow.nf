@@ -56,13 +56,14 @@ workflow QUICKFLOW {
 
     //-- * Stage 2: generate settings command line
     settings = generateSettings()
+    // settings.view()
 
     //-- * Stage 3: Prepend parameters for quick
     //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
     
     to_do = conformers.combine(settings)
-    to_do.view()
-    // preped_input = prepareInput(todo)
+    // to_do.view()
+    preped_input = prepareInput(to_do)
 
 
     // //-- * Stage 4: Quick Calculation
@@ -70,7 +71,7 @@ workflow QUICKFLOW {
     // //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
     // //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
     // //-- ? GPU enabled by default, if not run on CPU
-    // quick_out = quickGPU(preped_input)
+    quick_out = quickGPU(preped_input)
     // quick_out.view()
 
 

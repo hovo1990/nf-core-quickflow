@@ -178,7 +178,7 @@ def start_program(hamiltonian,dft_method,basis,
             mainArg += "EXPORT=" + str(export) + " "
         
         logger.debug(" Info>  mainArg ->  {}".format(mainArg))
-        sys.stdout.write("Hello world")
+        sys.stdout.write(mainArg)
         exit(0)
     except Exception as e:
         logger.warning(" Error> Unable to save xyz file {}".format(e))
