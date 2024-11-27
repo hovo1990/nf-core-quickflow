@@ -30,6 +30,8 @@ RUN cd QUICK && mkdir build && git checkout $(git tag -l | sort -V | tail -n 1)
 
 WORKDIR /src/QUICK/build
 
+#-- TODO Compiler flags, like avx2, test without conda, check if there is an error or not
+#-- * Set Debug to True
 RUN cmake .. -DCOMPILER=GNU -DCMAKE_INSTALL_PREFIX=$(pwd)/../install -DCUDA=TRUE -DMPI=TRUE
 
 RUN make -j4 install

@@ -85,6 +85,7 @@ workflow QUICKFLOW {
         quick_out = quickCPU(preped_input)
     }
 
+    
 
 
 
