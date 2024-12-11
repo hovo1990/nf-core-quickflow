@@ -74,6 +74,7 @@ workflow QUICKFLOW {
     // //-- ? GPU enabled by default, if not run on CPU
 
 
+    //-- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
     //-- TODO add QCSchema export in quick
     if ( params.useGPU ) {
         quick_out = quickGPU(preped_input)
