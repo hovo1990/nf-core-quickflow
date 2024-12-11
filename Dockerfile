@@ -24,8 +24,14 @@ RUN mkdir /src \
 WORKDIR /src
 
 #-- * Git clone quick and release candidate
-RUN git clone https://github.com/merzlab/QUICK.git
-RUN cd QUICK && mkdir build && git checkout $(git tag -l | sort -V | tail -n 1)
+# RUN git clone https://github.com/merzlab/QUICK.git
+# RUN cd QUICK && mkdir build && git checkout $(git tag -l | sort -V | tail -n 1)
+
+
+
+#-- * Debug version
+RUN git clone https://github.com/hovo1990/QUICK.git
+RUN cd QUICK && mkdir build 
 
 
 WORKDIR /src/QUICK/build
