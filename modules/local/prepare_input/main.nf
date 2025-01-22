@@ -12,6 +12,7 @@ process prepareInput{
     }
     else {
         container "${params.container_link}"
+        containerOptions " --gpus all"
     }
 
 
