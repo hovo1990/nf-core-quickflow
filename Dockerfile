@@ -30,7 +30,7 @@ WORKDIR /src
 
 
 #-- * Debug version
-RUN git clone https://github.com/hovo1990/QUICK.git
+RUN git clone -b dev https://github.com/hovo1990/QUICK.git
 RUN cd QUICK && mkdir build 
 
 
