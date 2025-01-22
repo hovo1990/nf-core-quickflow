@@ -64,7 +64,7 @@ workflow QUICKFLOW {
     // //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
     
     to_do = settings
-    to_do.view()
+    // to_do.view()
     preped_input = prepareInput(to_do)
 
 
@@ -75,17 +75,17 @@ workflow QUICKFLOW {
     // // //-- ? GPU enabled by default, if not run on CPU
 
 
-    // //-- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
-    // //-- TODO add QCSchema export in quick
-    // if ( params.useGPU ) {
-    //     quick_out = quickGPU(preped_input)
-    //     // quick_out.view()
-    // } 
-    // else {
-    //     //-- ! Gives segmentation fault, really
-    //     //-- TODO discuss with Andy
-    //     quick_out = quickCPU(preped_input)
-    // }
+    //-- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
+    //-- TODO add QCSchema export in quick
+    if ( params.useGPU ) {
+        quick_out = quickGPU(preped_input)
+        // quick_out.view()
+    } 
+    else {
+        //-- ! Gives segmentation fault, really
+        //-- TODO discuss with Andy
+        quick_out = quickCPU(preped_input)
+    }
 
     
 
