@@ -54,37 +54,38 @@ workflow QUICKFLOW {
 
     //-- * Stage 1: Prepare conformers and save xyz
     conformers = generateConformer(ch_compounds_input)
+    // conformers.view()
 
     //-- * Stage 2: generate settings command line
-    settings = generateSettings()
+    settings = generateSettings(conformers)
     // settings.view()
 
-    //-- * Stage 3: Prepend parameters for quick
-    //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
+    // //-- * Stage 3: Prepend parameters for quick
+    // //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
     
-    to_do = conformers.combine(settings)
-    // to_do.view()
+    to_do = settings
+    to_do.view()
     preped_input = prepareInput(to_do)
 
 
-    // //-- * Stage 4: Quick Calculation
-    // //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
-    // //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
-    // //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
-    // //-- ? GPU enabled by default, if not run on CPU
+    // // //-- * Stage 4: Quick Calculation
+    // // //-- ? Manual: https://quick-docs.readthedocs.io/en/latest/user-manual.html
+    // // //-- ? Guide: https://quick-docs.readthedocs.io/en/latest/hands-on-tutorials.html
+    // // //-- ? https://www.reddit.com/r/comp_chem/comments/1f8cavw/how_can_i_visualise_molecular_orbitals_from/
+    // // //-- ? GPU enabled by default, if not run on CPU
 
 
-    //-- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
-    //-- TODO add QCSchema export in quick
-    if ( params.useGPU ) {
-        quick_out = quickGPU(preped_input)
-        // quick_out.view()
-    } 
-    else {
-        //-- ! Gives segmentation fault, really
-        //-- TODO discuss with Andy
-        quick_out = quickCPU(preped_input)
-    }
+    // //-- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
+    // //-- TODO add QCSchema export in quick
+    // if ( params.useGPU ) {
+    //     quick_out = quickGPU(preped_input)
+    //     // quick_out.view()
+    // } 
+    // else {
+    //     //-- ! Gives segmentation fault, really
+    //     //-- TODO discuss with Andy
+    //     quick_out = quickCPU(preped_input)
+    // }
 
     
 

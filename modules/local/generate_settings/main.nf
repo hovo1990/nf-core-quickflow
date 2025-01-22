@@ -1,11 +1,9 @@
 
 process generateSettings{
 
-    // publishDir "${params.outdir}/stage2_prep_input", mode: 'copy', overwrite: true
-    // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
-    //         ${params.singularity_local_container} :
-    //         'biocontainers/gawk:5.3.0' }"
+    publishDir "${params.outdir}/stage2_settings", mode: 'copy', overwrite: true
 
+    beforeScript "hostname"
     if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
         containerOptions " --nv"
@@ -20,11 +18,11 @@ process generateSettings{
     label "process_low"
 
 
-    // input:
-    //     path(input)
+    input:
+        path(input)
 
     output:
-        stdout
+        tuple path(input), path("${input.simpleName}.param")
 
 
     script:
@@ -55,7 +53,8 @@ process generateSettings{
                                                         --gradient="${gradient}" \
                                                         --dipole="${dipole}" \
                                                         --optimize="${optimize}" \
-                                                        --export="${export}"
+                                                        --export="${export}" \
+                                                        --output="${input.simpleName}.param"
 
 
 

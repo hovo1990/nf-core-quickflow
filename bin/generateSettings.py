@@ -125,6 +125,12 @@ def timeit(func):
     required=True,
     type=str,
 )
+@click.option(
+    "--output",
+    help="output",
+    required=True,
+    type=str,
+)
 def start_program(hamiltonian,dft_method,basis,
                 scf_cutoff,scf_denserms,
                 charge,
@@ -132,7 +138,8 @@ def start_program(hamiltonian,dft_method,basis,
                 gradient,
                 dipole,
                 optimize,
-                export     
+                export,
+                output
 ):
     test = 1
 
@@ -178,7 +185,9 @@ def start_program(hamiltonian,dft_method,basis,
             mainArg += "EXPORT=" + str(export) + " "
         
         logger.debug(" Info>  mainArg ->  {}".format(mainArg))
-        sys.stdout.write(mainArg)
+        # sys.stdout.write(mainArg)
+        with open(output, "w") as file:
+            file.write(mainArg)
         exit(0)
     except Exception as e:
         logger.warning(" Error> Unable to save xyz file {}".format(e))

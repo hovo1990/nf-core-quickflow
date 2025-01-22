@@ -1,7 +1,8 @@
 
 process prepareInput{
 
-    publishDir "${params.outdir}/stage2_prep_input", mode: 'copy', overwrite: true
+    beforeScript "hostname"
+    publishDir "${params.outdir}/stage3_prep_input", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
     //         'biocontainers/gawk:5.3.0' }"
@@ -30,6 +31,7 @@ process prepareInput{
     script:
         def i_version=4
     """
+        sleep 5
         cp ${input} ${input.simpleName}_prep.xyz
         sed -i '1s/.*/${mainArg}/' ${input.simpleName}_prep.xyz 
     """
