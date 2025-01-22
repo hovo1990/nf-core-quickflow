@@ -2,7 +2,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/quickflow/master/nextflow_schema.json",
     "title": "nf-core/quickflow pipeline parameters",
-    "description": "Scalable Quantum Chemistry Data Generation using Quick ",
+    "description": "Scalable Quantum Chemistry Data Generation using Quick",
     "type": "object",
     "$defs": {
         "input_output_options": {
@@ -343,7 +343,8 @@
                     "description": "Generates a molden file that contains orbitals, charges, geometries, etc.",
                     "default": "MOLDEN",
                     "enum": [
-                        "MOLDEN"
+                        "MOLDEN",
+                        "QCSchema"
                             ],
                     "hidden": false
                 },
