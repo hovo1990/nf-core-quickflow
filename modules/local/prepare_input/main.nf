@@ -22,7 +22,7 @@ process prepareInput{
 
 
     input:
-        tuple path(input), val(mainArg)
+        tuple path(input), path(mainArg)
 
     output:
         path("${input.simpleName}_prep.xyz")
@@ -31,8 +31,8 @@ process prepareInput{
     script:
         def i_version=4
     """
-        sleep 5
         cp ${input} ${input.simpleName}_prep.xyz
-        sed -i '1s/.*/${mainArg}/' ${input.simpleName}_prep.xyz 
+        mainArgTODO=\$(<${mainArg})
+        sed -i "1s/.*/\${mainArgTODO}/" ${input.simpleName}_prep.xyz
     """
 }
