@@ -12,6 +12,7 @@ https://github.com/kkrick-sdsu/QUICK/blob/master/Dockerfile
 git remote set-url --add --push origin git@github.com:hovo1990/nf-core-quickflow.git
 git remote -v
 git push
+git push --all
 
 = How to build container using docker
 
