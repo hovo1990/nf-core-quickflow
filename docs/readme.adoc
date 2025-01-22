@@ -8,6 +8,10 @@ https://nf-co.re/docs/tutorials/nf-core_contributing_overview
 
 https://github.com/kkrick-sdsu/QUICK/blob/master/Dockerfile
 
+= Add remote 
+git remote set-url --add --push origin git@github.com:hovo1990/nf-core-quickflow.git
+git remote -v
+git push
 
 = How to build container using docker
 
