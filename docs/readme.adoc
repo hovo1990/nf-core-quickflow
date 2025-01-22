@@ -129,6 +129,12 @@ docker push hgrabski/quick
 
 nextflow run main.nf \
    -resume \
+   -profile singularity \
+   -params-file test_data/config.yml 
+
+
+nextflow run main.nf \
+   -resume \
    -profile docker \
    -params-file test_data/config.yml 
 

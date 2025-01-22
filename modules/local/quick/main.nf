@@ -27,7 +27,9 @@ process quickGPU{
         path(input)
 
     output:
-        tuple path("${input.simpleName}.out"), path("${input.simpleName}.molden")
+        path("${input.simpleName}.out")
+        path("${input.simpleName}.molden"),  optional: true
+        path("${input.simpleName}.json"),  optional: true
 
 
     script:
