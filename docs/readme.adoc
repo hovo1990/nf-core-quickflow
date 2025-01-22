@@ -40,7 +40,7 @@ singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test3.in
 singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test4.in
 
 
-
+docker run --gpus all quick quick.cuda test4.in
 ----
 
 = How to run nextflow pipeline
@@ -116,4 +116,19 @@ nextflow run main.nf \
 
 ----
 
+
+= New test docker run
+
+push to dockerhub
+
+docker push quick:latest
+
+docker tag quick:latest hgrabski/quick
+docker push hgrabski/quick
+
+
+nextflow run main.nf \
+   -resume \
+   -profile docker \
+   -params-file test_data/config.yml 
 

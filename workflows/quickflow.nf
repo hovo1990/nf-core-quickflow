@@ -4,7 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-params.container_link = "biocontainers/gawk:5.3.0"
+params.container_link = "docker.io/hgrabski/quick:latest"
 
 
 
