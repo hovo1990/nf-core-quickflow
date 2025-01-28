@@ -14,7 +14,15 @@
             // },
 
             // Add the IDs of extensions you want installed when the container is created.
-            "extensions": ["ms-python.python", "ms-python.vscode-pylance", "fortran-lang.linter-gfortran","ms-vscode.cpptools"]
+            "extensions": ["ms-python.python", "ms-python.vscode-pylance", 
+            "fortran-lang.linter-gfortran",
+            "ms-vscode.cpptools",
+            "nextflow.nextflow",
+            "asciidoctor.asciidoctor-vscode",
+            "edwinhuish.better-comments-next",
+            "IBM.output-colorizer",
+            "naumovs.color-highlight"
+            ]
         }
     }
 }
