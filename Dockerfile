@@ -85,6 +85,8 @@ RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest  | tar -xvj b
 
 RUN $MAMBA create -n $ENV_NAME -c conda-forge --yes \
     'python==3.11' \
+    'pip' \
+    'uv' \
     'numba' \
     'click' \
     'tqdm' \
@@ -111,6 +113,9 @@ RUN $MAMBA create -n $ENV_NAME -c conda-forge --yes \
     'psycopg' \
     'sqlalchemy'  && \
     "${MAMBA}" clean --all -f -y
+
+RUN    $MAMBA  run -n $ENV_NAME uv pip install click nf-core
+
 
 # Copy the compiled quick runtimes, leaving behind extra build dependencies & reducing image size
 COPY --from=base-mpi-cuda-12.0.1 /src /src
