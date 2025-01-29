@@ -1,11 +1,9 @@
 {
     "name": "quickflow-dev",
-    // "image": "nfcore/gitpod:latest",
 
     "build": {
         "dockerfile": "Dockerfile"
     },
-
 
     "remoteUser": "vscode",
     "runArgs": ["--privileged"],
@@ -14,23 +12,19 @@
     "customizations": {
         // Configure properties specific to VS Code.
         "vscode": {
-            // Set *default* container specific settings.json values on container create.
-            // "settings": {
-            //     "python.defaultInterpreterPath": "/opt/micromamba//bin/python"
-            // },
 
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-            "ms-python.python", 
-            "ms-python.vscode-pylance", 
-             "nf-core.nf-core-extensionpack",
-            "fortran-lang.linter-gfortran",
-            "ms-vscode.cpptools",
-            "nextflow.nextflow",
-            "asciidoctor.asciidoctor-vscode",
-            "edwinhuish.better-comments-next",
-            "IBM.output-colorizer",
-            "naumovs.color-highlight"
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "nf-core.nf-core-extensionpack",
+                "fortran-lang.linter-gfortran",
+                "ms-vscode.cpptools",
+                "nextflow.nextflow",
+                "asciidoctor.asciidoctor-vscode",
+                "edwinhuish.better-comments-next",
+                "IBM.output-colorizer",
+                "naumovs.color-highlight"
             ]
         }
     }

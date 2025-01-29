@@ -154,36 +154,32 @@ def start_program(hamiltonian,dft_method,basis,
     logger.debug(" Info>  dipole {}".format(dipole))
     logger.debug(" Info>  optimize {}".format(optimize))
     logger.debug(" Info>  export {}".format(export))
-
-
-    # quit(251)
-    
     try:
         #-- * start creating Quick settings for the compounds
         mainArg = ''
         mainArg += hamiltonian + " "
         if hamiltonian == 'DFT' or hamiltonian =="UDFT":
             mainArg += dft_method + " "
-            
+
         mainArg += basis + " "
         mainArg += "cutoff=" + scf_cutoff + " "
         mainArg += "denserms=" + scf_denserms + " "
-        
+
         mainArg += "CHARGE=" + str(charge) + " "
         mainArg += "MULT=" + str(mult) + " "
-        
+
         if gradient is True:
             mainArg += "GRADIENT" + " "
-        
+
         if dipole is True:
             mainArg += "DIPOLE" + " "
-            
+
         if optimize is True:
             mainArg += "OPTIMIZE" + " "
-        
+
         if export is not None:
             mainArg += "EXPORT=" + str(export) + " "
-        
+
         logger.debug(" Info>  mainArg ->  {}".format(mainArg))
         # sys.stdout.write(mainArg)
         with open(output, "w") as file:

@@ -89,9 +89,6 @@ def start_program(id, name,smiles, output):
     logger.info(" Info>  smiles {}".format(smiles))
     logger.info(" Info>  name {}".format(name))
     logger.info(" Info>  output file {}".format(output))
-
-    # quit(1)
-    
     try:
         #-- * Create an OBMol (Open Babel molecule) from the SMILES string
         obConversion = openbabel.OBConversion()

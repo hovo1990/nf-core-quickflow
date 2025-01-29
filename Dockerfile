@@ -6,10 +6,10 @@
 FROM nvidia/cuda:12.0.1-devel-ubuntu22.04 AS base-mpi-cuda-12.0.1
 
 LABEL authors="Hovakim Grabski" \
-      description="Docker image containing all software requirements for the nf-core/quickflow pipeline"
+        description="Docker image containing all software requirements for the nf-core/quickflow pipeline"
 
 RUN apt-get update -y \
- && apt-get install -y \
+    && apt-get install -y \
     gfortran \
     cmake \
     g++ \
@@ -19,7 +19,7 @@ RUN apt-get update -y \
     libopenmpi-dev
 
 RUN mkdir /src \
- && mkdir /src/build
+    && mkdir /src/build
 
 WORKDIR /src
 
@@ -31,7 +31,7 @@ WORKDIR /src
 
 #-- * Debug version
 RUN git clone -b dev https://github.com/hovo1990/QUICK.git
-RUN cd QUICK && mkdir build 
+RUN cd QUICK && mkdir build
 
 
 WORKDIR /src/QUICK/build
@@ -49,20 +49,20 @@ RUN make -j4 install
 # Runtime image is smaller than the devel/build image
 FROM nvidia/cuda:12.0.1-runtime-ubuntu22.04 AS mpi-cuda-12.0.1
 LABEL authors="Hovakim Grabski" \
-      description="Docker image containing all software requirements for the nf-core/quickflow pipeline"
+        description="Docker image containing all software requirements for the nf-core/quickflow pipeline"
 
 
 # Set up environment variables
-ENV MAMBA_ROOT_PREFIX="/opt/micromamba/" 
+ENV MAMBA_ROOT_PREFIX="/opt/micromamba/"
 ENV MAMBA="${MAMBA_ROOT_PREFIX}/bin/micromamba"
-ENV ENV_NAME="quick" 
-ENV LC_ALL="C" 
-ENV PATH="/opt/micromamba/envs/quick/bin:${PATH}" 
-ENV LC_ALL="C" 
+ENV ENV_NAME="quick"
+ENV LC_ALL="C"
+ENV PATH="/opt/micromamba/envs/quick/bin:${PATH}"
+ENV LC_ALL="C"
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update -y \
- && apt-get install -y \
+    && apt-get install -y \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
