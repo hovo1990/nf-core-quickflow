@@ -1,7 +1,13 @@
 {
-    "name": "nfcore",
-    "image": "nfcore/gitpod:latest",
-    "remoteUser": "gitpod",
+    "name": "quickflow-dev",
+    // "image": "nfcore/gitpod:latest",
+
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+
+    "remoteUser": "vscode",
     "runArgs": ["--privileged"],
 
     // Configure tool-specific properties.
@@ -10,11 +16,14 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             // "settings": {
-            //     "python.defaultInterpreterPath": "/opt/conda/bin/python"
+            //     "python.defaultInterpreterPath": "/opt/micromamba//bin/python"
             // },
 
             // Add the IDs of extensions you want installed when the container is created.
-            "extensions": ["ms-python.python", "ms-python.vscode-pylance", 
+            "extensions": [
+            "ms-python.python", 
+            "ms-python.vscode-pylance", 
+             "nf-core.nf-core-extensionpack",
             "fortran-lang.linter-gfortran",
             "ms-vscode.cpptools",
             "nextflow.nextflow",
