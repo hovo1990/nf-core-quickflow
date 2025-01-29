@@ -14,7 +14,7 @@
             },
             "SMILES": {
                 "type": "string",
-                "pattern": "^([BCNOFPSIbcnofps#@+\/-\/[\/]\/(\/)\\\/%=0-9]+)$",
+                "pattern": "^([BCNOFPSIbcnofps#@+/-/[/]/(/)\\/%=0-9]+)$",
                 "errorMessage": "Chemical structure must be in smiles format"
             },
             "NAME": {
@@ -23,6 +23,6 @@
                 "errorMessage": "Name of the Chemical Structre"
             }
         },
-        "required": ["ID", "SMILES","NAME"]
+        "required": ["ID", "SMILES", "NAME"]
     }
 }

@@ -1,18 +1,13 @@
 input: /home/hovakim/GitSync/main/nf-core-quickflow/test_data/compounds.csv
 outdir: /home/hovakim/GitSync/main/nf-core-quickflow/testOut
 
-
 singularity_local_container: /home/hovakim/GitSync/quick.sif
 singularity_use_local_file: true
 singularity_pull_docker_container: false
 
 # export: "MOLDEN"
 
-
 export: "QCSchema"
-
-
-
 # libxc: function1,function2
 # useGPU: false
 # export: null

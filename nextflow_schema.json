@@ -216,29 +216,21 @@
                         "PC-2",
                         "aug-PC-1",
                         "aug-PC-2"
-                            ],
+                    ],
                     "hidden": false
                 },
                 "hamiltonian": {
                     "type": "string",
                     "description": "Selects Hamiltonian ",
                     "default": "DFT",
-                    "enum": [
-                        "HF",
-                        "UHF",
-                        "DFT",
-                        "UDFT"
-                            ],
+                    "enum": ["HF", "UHF", "DFT", "UDFT"],
                     "hidden": false
                 },
                 "dft_method": {
                     "type": "string",
                     "description": "Selects BASIS_SET_NAME basis set for the calculation. BASIS_SET_NAME could be any of the following. The basis set name is not case sensitive. ",
                     "default": "B3LYP",
-                    "enum": [
-                        "BLYP",
-                        "B3LYP"
-                            ],
+                    "enum": ["BLYP", "B3LYP"],
                     "hidden": false
                 },
                 "libxc_BP86": {
@@ -308,13 +300,13 @@
                     "default": "1.0e-6",
                     "hidden": false
                 },
-                "charge":{
+                "charge": {
                     "type": "integer",
                     "description": "A net charge is to be placed on system. Default: 0",
                     "default": 0,
                     "hidden": false
                 },
-                "mult":{
+                "mult": {
                     "type": "integer",
                     "description": "Spin multiplicity of the system. Default: 1",
                     "default": 1,
@@ -342,13 +334,9 @@
                     "type": "string",
                     "description": "Generates a molden file that contains orbitals, charges, geometries, etc.",
                     "default": "MOLDEN",
-                    "enum": [
-                        "MOLDEN",
-                        "QCSchema"
-                            ],
+                    "enum": ["MOLDEN", "QCSchema"],
                     "hidden": false
-                },
-
+                }
             }
         }
     },
@@ -356,7 +344,7 @@
         {
             "$ref": "#/$defs/input_output_options"
         },
-        
+
         {
             "$ref": "#/$defs/institutional_config_options"
         },
