@@ -68,4 +68,5 @@
     ],
     "workbench.preferredDarkColorTheme": "Nord",
     "workbench.preferredHighContrastColorTheme": "Nord",
+    "files.trimTrailingWhitespace": true,
 }

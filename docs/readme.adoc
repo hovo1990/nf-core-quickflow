@@ -1,14 +1,10 @@
 = Resources
 
 https://github.com/nf-core/sarek/blob/3.4.4/modules/local/create_intervals_bed/main.nf
-
-
-
 https://nf-co.re/docs/tutorials/nf-core_contributing_overview
-
 https://github.com/kkrick-sdsu/QUICK/blob/master/Dockerfile
 
-= Add remote 
+= add stuff
 git remote set-url --add --push origin git@github.com:hovo1990/nf-core-quickflow.git
 git remote -v
 git push
@@ -29,10 +25,6 @@ docker run -it --gpus all quick /bin/bash
 
 cd /home/hovakim/GitSync
 singularity build quick.sif docker-daemon://quick:latest
-
-
-singularity run --nv /home/hovakim/GitSync/quick.sif 
-
 
 singularity exec --nv /home/hovakim/GitSync/quick.sif  quick.cuda test2.in
 
@@ -111,9 +103,7 @@ nextflow run main.nf \
 nextflow run main.nf \
    -resume \
    -profile singularity \
-   -params-file test_data/config.yml 
-
-
+   -params-file test_data/config.yml
 ----
 
 
@@ -130,11 +120,10 @@ docker push hgrabski/quick
 nextflow run main.nf \
    -resume \
    -profile singularity \
-   -params-file test_data/config.yml 
-
+   -params-file test_data/config.yml
 
 nextflow run main.nf \
    -resume \
    -profile docker \
-   -params-file test_data/config.yml 
+   -params-file test_data/config.yml
 
