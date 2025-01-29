@@ -86,7 +86,6 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        
     )
 }
 

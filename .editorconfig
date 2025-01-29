@@ -29,5 +29,5 @@ indent_style = unset
 indent_size = unset
 
 # ignore python and markdown, and sdf test inputs
-[*.{py,md,sdf}]
+[*.{py,md,sdf,adoc,xyz}]
 indent_style = unset
