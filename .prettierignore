@@ -10,5 +10,4 @@ testing/
 testing*
 *.pyc
 bin/
-*.sdf
-*.xyz
+ro-crate-metadata.json
