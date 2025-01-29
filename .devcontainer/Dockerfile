@@ -2,7 +2,7 @@
 # Runtime image is smaller than the devel/build image
 FROM ubuntu:22.04
 LABEL authors="Hovakim Grabski" \
-      description="Docker image containing all software requirements for the nf-core/quickflow pipeline development"
+        description="Docker image containing all software requirements for the nf-core/quickflow pipeline development"
 
 
 # Set up environment variables
@@ -15,7 +15,7 @@ ENV LC_ALL="C"
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update -y \
- && apt-get install -y \
+    && apt-get install -y \
     openmpi-bin \
     openmpi-common \
     libopenmpi-dev \
