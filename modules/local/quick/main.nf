@@ -12,10 +12,15 @@ process quickGPU{
         container "${params.singularity_local_container}"
         containerOptions " --nv"
     }
+    else if (workflow.containerEngine == 'singularity' ){
+        container "${params.container_link}"
+        containerOptions " --nv"
+    }
     else {
         container "${params.container_link}"
         containerOptions " --gpus all"
     }
+
 
 
     // container "${params.singularity_local_container}"
@@ -54,9 +59,14 @@ process quickCPU{
 
     if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
+        // containerOptions " --nv"
+    }
+    else if (workflow.containerEngine == 'singularity' ){
+        container "${params.container_link}"
     }
     else {
         container "${params.container_link}"
+        // containerOptions " --gpus all"
     }
 
 

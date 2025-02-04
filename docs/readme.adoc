@@ -104,6 +104,9 @@ nextflow run main.nf \
    -resume \
    -profile singularity \
    -params-file test_data/config.yml
+
+NXF_SINGULARITY_CACHEDIR
+
 ----
 
 
@@ -111,8 +114,7 @@ nextflow run main.nf \
 
 push to dockerhub
 
-docker push quick:latest
-
+docker buildx build -t quick .
 docker tag quick:latest hgrabski/quick
 docker push hgrabski/quick
 
@@ -134,5 +136,5 @@ nextflow run main.nf \
 nf-core pipelines lint
 
 nf-core pipelines lint   --fix files_unchanged
-
+nf-core pipelines sync
 ----

@@ -6,12 +6,16 @@ process generateSettings{
     beforeScript "hostname"
     if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
-        containerOptions " --nv"
+        // containerOptions " --nv"
+    }
+    else if (workflow.containerEngine == 'singularity' ){
+        container "${params.container_link}"
     }
     else {
         container "${params.container_link}"
-        containerOptions " --gpus all"
+        // containerOptions " --gpus all"
     }
+
 
 
 
