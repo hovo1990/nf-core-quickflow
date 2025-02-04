@@ -1,3 +1,10 @@
-sample,fastq_1,fastq_2
-SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
-SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
+ID,SMILES,NAME
+CID702,CCO,Ethanol
+CID887,CO,Methanol
+CID3776,CC(C)O,Isopropyl
+C1,CCC,Cust1
+C2,CCCC,Cust2
+C3,CCCCC,Cust3
+C4,O,water
+C5,CC,cust4
+C6,CCF,cust5
