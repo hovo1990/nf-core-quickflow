@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH --job-name="nf_quick"
+#SBATCH --output="nf_quick.%j.%N.out"
+#SBATCH --partition=shared
+###SBATCH --partition=debug
+#SBATCH --export=ALL
+#SBATCH -t 48:00:00
+####SBATCH -t 00:20:00
+
+
+#SBATCH -A sds196
+#SBATCH --mem 2000M
+#SBATCH --cpus-per-task=2
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+
+##  Load module file(s) into the shell environment
+
+module purge
+module purge
+module load slurm
+module load gpu/0.17.3b
+module load gcc/10.2.0/i62tgso
+module load  openjdk/11.0.12_7/xkfgsx7
+
+export NFX_OPTS="-Xms=512m -Xmx=4g"
+~/nextflow -C ~/pro/hpc/pipeline/gpu_combi_slurm/nextflow.config  \
+    run -profile expanse \
+    ~/pro/hpc/pipeline/gpu_combi_slurm/gpu_combi_slurm.nf \
+    -params-file /expanse/lustre/projects/sds196/hgrabski/test/config.yml  \
+    -resume \
+    -with-singularity true
