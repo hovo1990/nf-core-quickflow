@@ -28,8 +28,9 @@ git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 
 
 
-cp  -R nf-core-quickflow/docs/HPC/Expanse/ quickflow-test-run
+cp  -R nf-core-quickflow/docs/HPC/Expanse/ quickflow-test-run/
 
+cd quickflow-test-run
 #-- * Prepare project NAME
 
 
