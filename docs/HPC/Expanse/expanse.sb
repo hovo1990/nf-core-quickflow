@@ -31,4 +31,5 @@ export NXF_SINGULARITY_CACHEDIR="/expanse/lustre/projects/<<EXPANSEPROJECT>>/<<U
     /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/main.nf \
     -params-file /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/docs/HPC/Expanse/config.yml  \
     -resume
+    -N <<YOUREMAIL>>
 

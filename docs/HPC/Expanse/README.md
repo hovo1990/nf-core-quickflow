@@ -16,7 +16,7 @@ curl -s https://get.nextflow.io | bash
 ```bash
 EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
 USERNAME=$USER
-
+YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"
 
 cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
 mkdir -p /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME/singularity_images
@@ -36,6 +36,7 @@ cd quickflow-test-run
 
 sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" expanse.sb
 sed -i "s|<<USERNAME>>|${USERNAME}|g" expanse.sb
+sed -i "s|<<YOUREMAIL>>|${YOUREMAIL}|g" expanse.sb
 
 sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" config.yml
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
