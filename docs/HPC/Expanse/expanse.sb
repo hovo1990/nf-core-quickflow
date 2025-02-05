@@ -25,9 +25,10 @@ module load  openjdk/11.0.12_7/xkfgsx7
 module load singularitypro/3.11
 
 export NFX_OPTS="-Xms=512m -Xmx=4g"
-~/nextflow -C ~/pro/hpc/pipeline/gpu_combi_slurm/nextflow.config  \
+export NXF_SINGULARITY_CACHEDIR="/expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/singularity_images"
+~/nextflow  \
     run -profile expanse \
-    ~/pro/hpc/pipeline/gpu_combi_slurm/gpu_combi_slurm.nf \
-    -params-file /expanse/lustre/projects/sds196/hgrabski/test/config.yml  \
+    /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/main.nf \
+    -params-file /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/docs/HPC/Expanse/config.yml  \
     -resume
 

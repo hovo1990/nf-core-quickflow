@@ -1,5 +1,6 @@
-input: /home/hovakim/GitSync/main/nf-core-quickflow/test_data/compounds.csv
-outdir: /home/hovakim/GitSync/main/nf-core-quickflow/testOut
+input: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/test_data/compounds.csv
+outdir: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow-testout
+output_workdir: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow-workdir
 
 # singularity_local_container: /home/hovakim/GitSync/quick.sif
 # singularity_use_local_file: true
