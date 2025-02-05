@@ -1,6 +1,7 @@
 
 process quickGPU{
 
+    label 'gpu_task'
     publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
@@ -50,6 +51,7 @@ process quickGPU{
 
 process quickCPU{
 
+    label 'cpu_task'
     publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
