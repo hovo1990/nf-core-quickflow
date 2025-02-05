@@ -14,5 +14,21 @@ curl -s https://get.nextflow.io | bash
 # How to run the pipeline
 
 ```bash
+EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
+USERNAME=$USER
+
+cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
+
+git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
+cd nf-core-quickflow/docs/HPC/Expanse
+
+#-- * Prepare project NAME
+
+
+sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" expanse.sb
+sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
+
+
+sbatch expanse.sb
 
 ```
