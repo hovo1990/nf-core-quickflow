@@ -22,8 +22,13 @@ cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
 mkdir -p /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME/singularity_images
 
 
+mkdir -p quickflow-test-run
+
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
-cd nf-core-quickflow/docs/HPC/Expanse
+
+
+
+cp  -R nf-core-quickflow/docs/HPC/Expanse/ quickflow-test-run
 
 #-- * Prepare project NAME
 
