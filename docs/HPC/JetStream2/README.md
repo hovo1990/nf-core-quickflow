@@ -47,7 +47,7 @@ apptainer run --nv cuda_12.0.1-runtime-ubuntu22.04.sif nvidia-smi
 tmux new-session -s quickflow
 
 USERNAME=$USER
-YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"
+
 
 
 cd ~
@@ -61,10 +61,8 @@ cp  -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
 cd quickflow-test-run/JetStream2
 #-- * Prepare project NAME
 
-
-
-sed -i "s|<<YOUREMAIL>>|${YOUREMAIL}|g" jtgpu.sb
-
+sed -i "s|<<USERNAME>>|${USERNAME}|g" jtgpu.sb
+sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
 
 # run workflow
 bash jtgpu.sb
