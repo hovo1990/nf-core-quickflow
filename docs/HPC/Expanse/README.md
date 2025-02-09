@@ -49,6 +49,10 @@ tmux new-session -s quickflow
 bash expanse.sb
 
 
+# to detach
+
+# to reconnect session
+tmux attach -t quickflow
 
 # -- * The output files will be located at nf-core-quickflow-testout folder accoring to config.yml
 
