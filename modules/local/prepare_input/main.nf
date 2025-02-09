@@ -2,6 +2,10 @@
 process prepareInput{
 
     label 'low_cpu'
+
+    cpus  1
+    memory  '1 GB'
+
     beforeScript "hostname"
     publishDir "${params.outdir}/stage3_prep_input", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?

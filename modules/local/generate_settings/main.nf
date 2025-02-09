@@ -2,6 +2,11 @@
 process generateSettings{
 
     label 'low_cpu'
+
+    cpus  1
+    memory '1 GB'
+
+
     publishDir "${params.outdir}/stage2_settings", mode: 'copy', overwrite: true
 
     beforeScript "hostname"
