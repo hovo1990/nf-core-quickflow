@@ -11,9 +11,12 @@ cd ~
 curl -s https://get.nextflow.io | bash
 ```
 
-# How to run the pipeline as an example
+# How to run the pipeline as an example (interactive mode)
 
 ```bash
+# create new tmux session to launch in interactive mode
+tmux new-session -s quickflow
+
 EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
 USERNAME=$USER
 YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"
@@ -42,8 +45,7 @@ sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" config.yml
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
 
 
-# create new tmux session to launch in interactive mode
-tmux new-session -s quickflow
+
 
 # run workflow
 bash expanse.sb
@@ -53,6 +55,10 @@ bash expanse.sb
 
 # to reconnect session
 tmux attach -t quickflow
+
+
+# kill tmux session
+tmux kill-session  -t quickflow
 
 # -- * The output files will be located at nf-core-quickflow-testout folder accoring to config.yml
 
