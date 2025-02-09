@@ -42,7 +42,7 @@ sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" config.yml
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
 
 
-# create new tmux session
+# create new tmux session to launch in interactive mode
 tmux new-session -s quickflow
 
 # run workflow

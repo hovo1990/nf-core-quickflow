@@ -9,7 +9,7 @@ singularity_pull_docker_container: true
 # export: "MOLDEN"
 
 export: "QCSchema"
-partition: sds196
+
 
 
 # libxc: function1,function2
