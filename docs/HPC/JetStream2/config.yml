@@ -1,0 +1,27 @@
+input: ~/nf-core-quickflow/test_data/compounds.csv
+outdir: ~/nf-core-quickflow-testout
+output_workdir: ~/nf-core-quickflow-workdir
+
+# singularity_local_container: /home/hovakim/GitSync/quick.sif
+# singularity_use_local_file: true
+singularity_pull_docker_container: true
+
+# export: "MOLDEN"
+
+export: "QCSchema"
+
+
+
+# libxc: function1,function2
+# useGPU: false
+# export: null
+
+# basis: "STO-3G"
+# basis: "6-311+G(2d,p)"
+
+# basis: "STO-YOLO"
+
+# method: DFT
+# basis: 6G
+# optimize: true/false
+# export_molden: true/false
