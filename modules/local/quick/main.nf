@@ -57,8 +57,7 @@ process quickCPU{
 
     label 'cpu_task'
 
-    cpus  8
-    memory  '16 GB'
+
 
     publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?

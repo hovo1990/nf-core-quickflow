@@ -5,8 +5,6 @@ process generateConformer{
 
     label 'low_cpu'
 
-    cpus  4
-    memory  '2 GB'
 
     publishDir "${params.outdir}/stage1_generate_conformers", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
