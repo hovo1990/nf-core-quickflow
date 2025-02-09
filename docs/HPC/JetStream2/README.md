@@ -1,17 +1,26 @@
-# Create Virtual Cluster
+# Create GPU instance in Jetstream2 on Almalinux 9  base image
 
-## Before moving forward
+## Steps to do
 
-Read:
-https://docs.jetstream-cloud.org/ui/exo/exo/
-
-
-# After
-
-Once you create a virtual cluster using the following guide:
-https://docs.jetstream-cloud.org/general/virtualclusters/
-https://docs.jetstream-cloud.org/ui/exo/push-button-cluster/
+SSH into machine, lets install some modules
 
 
+```bash
+# install apptainer
+sudo dnf install apptainer -y
 
-#
+# install openjdk
+sudo dnf install java-21-openjdk
+
+# switch to open jdk to jdk 21
+sudo alternatives --config java
+
+
+# install nextflow
+curl -s https://get.nextflow.io | bash
+
+# check if it works
+~/nextflow -v
+
+
+```
