@@ -29,7 +29,7 @@ export NXF_SINGULARITY_CACHEDIR="/expanse/lustre/projects/<<EXPANSEPROJECT>>/<<U
 ~/nextflow  \
     run -profile expanse \
     /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/main.nf \
-    -params-file /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/docs/HPC/Expanse/config.yml  \
+    -params-file config.yml  \
     --project "<<EXPANSEPROJECT>>" \
     -resume \
     -N <<YOUREMAIL>>

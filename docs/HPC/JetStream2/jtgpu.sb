@@ -4,5 +4,5 @@ export NXF_SINGULARITY_CACHEDIR="/home/<<USERNAME>>/singularity_images"
 ~/nextflow  \
     run -profile apptainer \
     /home/<<USERNAME>>/nf-core-quickflow/main.nf \
-    -params-file /home/<<USERNAME>>/nf-core-quickflow/docs/HPC/JetStream2/config.yml  \
-    -resume \
+    -params-file config.yml  \
+    -resume
