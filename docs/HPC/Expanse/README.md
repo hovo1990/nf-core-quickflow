@@ -42,8 +42,20 @@ sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" config.yml
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
 
 
-sbatch expanse.sb
+# create new tmux session
+tmux new-session -s quickflow
+
+# run workflow
+bash expanse.sb
+
+
 
 # -- * The output files will be located at nf-core-quickflow-testout folder accoring to config.yml
 
+```
+
+# Run controller separately
+
+```bash
+sbatch expanse.sb
 ```
