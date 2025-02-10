@@ -3,6 +3,11 @@ process quickGPU{
 
     label 'gpu_task'
 
+    // -- * Better debugging
+    beforeScript 'hostname; nvidia-smi'
+
+
+
 
     publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
