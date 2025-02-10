@@ -44,7 +44,6 @@ process quickGPU{
     script:
         def i_version=1
     """
-        export CUDA_VISIBLE_DEVICES=0
         quick.cuda ${input}
     """
 }
