@@ -5,13 +5,15 @@
 SSH into machine, lets install some modules
 
 
+make sure to have an g3.large instance (20GB VRAM), generally 12 GB VRAM should be enough
+
 ```bash
 # install apptainer
 sudo dnf install -y epel-release
 sudo dnf install apptainer apptainer-suid libxslt-devel -y
 
 # install openjdk
-sudo dnf install java-21-openjdk
+sudo dnf install java-21-openjdk -y
 
 # switch to open jdk to jdk 21
 sudo alternatives --config java
@@ -22,6 +24,7 @@ sudo alternatives --config java
 sudo reboot -h now
 
 
+# reconnect to the instance
 # install nextflow
 curl -s https://get.nextflow.io | bash
 

@@ -59,6 +59,16 @@ singularity pull docker://docker.io/hgrabski/quick:latest
 # create new tmux session to launch in interactive mode
 tmux new-session -s quickflow
 
+
+
+module purge
+module load slurm
+module load gpu/0.17.3b
+module load gcc/10.2.0/i62tgso
+module load  openjdk/11.0.12_7/xkfgsx7
+module load singularitypro/3.11
+
+
 EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
 USERNAME=$USER
 YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"

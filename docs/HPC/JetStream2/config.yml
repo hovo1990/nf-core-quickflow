@@ -1,6 +1,5 @@
 input: /home/<<USERNAME>>/nf-core-quickflow/test_data/compounds.csv
 outdir: /home/<<USERNAME>>/nf-core-quickflow-testout
-output_workdir: /home/<<USERNAME>>/nf-core-quickflow-workdir
 
 # singularity_local_container: /home/hovakim/GitSync/quick.sif
 # singularity_use_local_file: true
