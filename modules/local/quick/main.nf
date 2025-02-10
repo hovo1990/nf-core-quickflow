@@ -3,8 +3,6 @@ process quickGPU{
 
     label 'gpu_task'
 
-    cpus  2
-    memory  '16 GB'
 
     publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
@@ -13,7 +11,7 @@ process quickGPU{
 
     // container "/home/hovakim/GitSync/quick.sif"
 
-    if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
+    if ( workflow.containerEngine in ['singularity', 'apptainer'] && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
         containerOptions " --nv"
     }
@@ -66,11 +64,11 @@ process quickCPU{
 
     // container "/home/hovakim/GitSync/quick.sif"
 
-    if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
+    if ( workflow.containerEngine in ['singularity', 'apptainer'] && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
         // containerOptions " --nv"
     }
-    else if (workflow.containerEngine == 'singularity' ){
+    else if (workflow.containerEngine in ['singularity', 'apptainer'] ){
         container "${params.container_link}"
     }
     else {
