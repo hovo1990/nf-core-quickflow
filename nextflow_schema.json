@@ -49,6 +49,11 @@
                     "exists": true,
                     "pattern": "^\\S+\\.sif$",
                     "errorMessage": "Singularity Container path"
+                },
+                "project": {
+                    "type": "string",
+                    "description": "Project name on the HPC cluster",
+                    "default": null
                 }
             }
         },
