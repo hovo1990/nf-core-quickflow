@@ -1,6 +1,6 @@
 input: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/test_data/compounds.csv
 outdir: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow-testout
-output_workdir: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow-workdir
+workDir: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow-workdir
 
 singularity_local_container: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/singularity_images/quick_latest.sif
 singularity_use_local_file: true
