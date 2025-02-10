@@ -17,7 +17,7 @@ process quickGPU{
         container "${params.singularity_local_container}"
         containerOptions " --nv"
     }
-    else if (workflow.containerEngine == 'singularity'){
+    else if (workflow.containerEngine in ['singularity', 'apptainer']){
         container "${params.container_link}"
         containerOptions " --nv"
     }

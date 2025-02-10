@@ -46,7 +46,7 @@ apptainer run --nv cuda_12.0.1-runtime-ubuntu22.04.sif nvidia-smi
 # create new tmux session to launch in interactive mode
 tmux new-session -s quickflow
 
-USERNAME=$USER
+
 
 
 
@@ -61,10 +61,13 @@ cp  -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
 cd quickflow-test-run/JetStream2
 #-- * Prepare project NAME
 
+USERNAME=$USER
 sed -i "s|<<USERNAME>>|${USERNAME}|g" jtgpu.sb
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
 
 # run workflow
+export NXF_SINGULARITY_CACHEDIR="/home/$USER/singularity_images"
+export NXF_APPTAINER_CACHEDIR="/home/$USER/singularity_images"
 bash jtgpu.sb
 
 
