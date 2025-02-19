@@ -24,6 +24,8 @@ include { generateConformerAdvanced } from '../modules/local/generate_conformer_
 
 include { generateSettings } from '../modules/local/generate_settings'
 
+include { generateSettingsAdvanced } from '../modules/local/generate_settings_advanced'
+
 
 include { prepareInput } from '../modules/local/prepare_input'
 
@@ -54,9 +56,13 @@ workflow QUICKFLOW {
 
 
 
+    // // -- * Stage 1: generate settings command line
+    settings = generateSettingsAdvanced()
+    settings.view()
+
     // -- ! Version 2
-    conformers = generateConformerAdvanced(ch_compounds_input)
-    conformers.view()
+    // conformers = generateConformerAdvanced(ch_compounds_input)
+    // conformers.view()
 
 
 

@@ -110,14 +110,32 @@ def generate_conformer(smiles,output, output_local):
 
             # -- * Add hydrogen atoms and optimize the 3D geometry
             mol.AddHydrogens()
-            obConversion.SetOutFormat("xyz")  # Set the output format
-            pybel.Molecule(mol).make3D()  # Use pybel's make3D function to optimize
+            obConversion.SetOutFormat("xyz")  # -- * Set the output format
+            pybel.Molecule(mol).make3D()  # -- * Use pybel's make3D function to optimize
+
+
+            # -- * Export the molecule manually with a custom header
+            xyz_data = pybel.Molecule(mol).write("xyz")
+            xyz_lines = xyz_data.splitlines()
+            logger.debug(" Debug> {}".format(xyz_lines))
+
 
             # -- * Export the molecule to a file
             logger.debug(f"File does not exist, writing from scratch")
-            output_filename = output
-            obConversion.WriteFile(mol, output_filename)
-            obConversion.WriteFile(mol, output_local)
+            # output_filename = output
+            # obConversion.WriteFile(mol, output_filename)
+            # obConversion.WriteFile(mol, output_local)
+
+            # -- * Modify the first line to write QUICK settings
+            xyz_lines[0] = "Hello world"
+
+            # Write to file
+            with open(output, "w") as f:
+                f.write("\n".join(xyz_lines) + "\n")
+
+            with open(output_local, "w") as f:
+                f.write("\n".join(xyz_lines) + "\n")
+
     except Exception as e:
         logger.warning(" Error> Unable to save xyz file {}".format(e))
         exit(1)
