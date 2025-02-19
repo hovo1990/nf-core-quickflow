@@ -60,35 +60,36 @@ def validate_xyz(ctx, param, value):
     return value
 
 
+def validate_csv(ctx, param, value):
+    logger.info(" Info> validate_csv is ", value)
+    if not value.lower().endswith(".csv"):
+        raise click.BadParameter("File must have a .csv extension")
+    return value
+
+
 @click.command()
 @click.option(
-    "--id",
-    help="id of the compound",
+    "--input",
+    help="csv input of the smiles",
+    type=click.Path(exists=True),
     required=True,
+    callback=validate_csv,
 )
 @click.option(
-    "--name",
-    help="compound name",
-    required=True,
+    "--cachedir",
+    help="custom cache dir to store conformers",
+    type=str,
+    required=True
 )
-@click.option(
-    "--smiles",
-    help="compound smiles",
-    required=True,
-)
-@click.option(
-    "--output",
-    help="Output generated conformer to xyz file",
-    callback=validate_xyz,
-    required=True,
-)
-def start_program(id, name,smiles, output):
+def start_program(input,cachedir):
     test = 1
 
-    logger.info(" Info>  id {}".format(input))
-    logger.info(" Info>  smiles {}".format(smiles))
-    logger.info(" Info>  name {}".format(name))
-    logger.info(" Info>  output file {}".format(output))
+    logger.info(" Info>  input {}".format(input))
+
+    logger.info(" Info>  cachedir{}".format(cachedir))
+
+    exit(1)
+
     try:
         # -- * Create an OBMol (Open Babel molecule) from the SMILES string
         obConversion = openbabel.OBConversion()

@@ -1,6 +1,6 @@
 
 //-- * Example: https://github.com/nf-core/sarek/blob/5cc30494a6b8e7e53be64d308b582190ca7d2585/modules/nf-core/gawk/main.nf#L6
-process generateConformer{
+process generateConformerAdvanced{
 
 
     label 'low_cpu'
@@ -31,19 +31,18 @@ process generateConformer{
 
 
     input:
-        tuple val(id), val(smiles), val(name)
+        path(csv_input)
 
     output:
-        path("${name}_${id}.xyz")
+        path("*.xyz")
 
 
     script:
         def i_version=1
     """
-        python ${projectDir}/bin/generateConformer.py   --id=${id} \
-                                                        --name=${name} \
-                                                        --smiles="${smiles}" \
-                                                        --output="${name}_${id}.xyz"
+        python ${projectDir}/bin/generateConformerAdvanced.py \
+                                                        --input=${csv_input} \
+                                                        --cachedir=${launchDir}/customCache/1_conformers
     """
 }
 

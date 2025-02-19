@@ -17,8 +17,10 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_quic
 
 
 
-//-- * Custom modules
+// -- * Custom modules
 include { generateConformer } from '../modules/local/generate_conformer'
+
+include { generateConformerAdvanced } from '../modules/local/generate_conformer_advanced'
 
 include { generateSettings } from '../modules/local/generate_settings'
 
@@ -52,7 +54,9 @@ workflow QUICKFLOW {
 
 
 
-
+    // -- ! Version 2
+    conformers = generateConformerAdvanced(ch_compounds_input)
+    conformers.view()
 
 
 
