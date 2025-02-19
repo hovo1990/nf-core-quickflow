@@ -90,7 +90,47 @@ def get_hashed_path(base_dir, filename, levels=2, width=2):
 
 
 
-def generate_conformer(smiles,output, output_local):
+
+def create_conformer(smiles,output, param):
+    try:
+        # -- * Create an OBMol (Open Babel molecule) from the SMILES string
+        obConversion = openbabel.OBConversion()
+        obConversion.SetInAndOutFormats("smi", "xyz")
+
+        mol = openbabel.OBMol()
+        obConversion.ReadString(mol, smiles)
+
+        # -- * Add hydrogen atoms and optimize the 3D geometry
+        mol.AddHydrogens()
+        obConversion.SetOutFormat("xyz")  # -- * Set the output format
+        pybel.Molecule(mol).make3D()  # -- * Use pybel's make3D function to optimize
+
+
+        # -- * Export the molecule manually with a custom header
+        xyz_data = pybel.Molecule(mol).write("xyz")
+        xyz_lines = xyz_data.splitlines()
+        logger.debug(" Debug> {}".format(xyz_lines))
+
+
+        # -- * Export the molecule to a file
+        logger.debug(f"File does not exist, writing from scratch")
+        # output_filename = output
+        # obConversion.WriteFile(mol, output_filename)
+        # obConversion.WriteFile(mol, output_local)
+
+        # -- * Modify the first line to write QUICK settings
+        xyz_lines[0] = param
+
+        # Write to file
+        with open(output, "w") as f:
+            f.write("\n".join(xyz_lines) + "\n")
+
+        return output
+    except Exception as e:
+        logger.warning(" Error> Unable to save xyz file {}".format(e))
+        exit(1)
+
+def generate_conformer(smiles,output, param):
     '''
         Generate conformer using Pybel
     '''
@@ -98,46 +138,24 @@ def generate_conformer(smiles,output, output_local):
 
         # -- * Check if file already exists
         if os.path.exists(output):
-            logger.debug(f"File already exists: {output}, simply copying")
-            shutil.copy2(output, output_local)
+            logger.debug(f" Debug> File already exists: {output}, simply copying")
+
+            # -- * check if param settings the the same
+            with open(output, "r") as f:
+                line = f.readline().strip()  # Reads one line and removes trailing newline
+                if line == param:
+                    logger.debug(" Debug> parameters are the same, nothing to do")
+                    return output
+                else:
+                    logger.debug(f" Debug> they are not the same: \nline->{line}\nline->{param}")
+                    gen_conf = create_conformer(smiles,output, param)
+                    return gen_conf
         else:
-            # -- * Create an OBMol (Open Babel molecule) from the SMILES string
-            obConversion = openbabel.OBConversion()
-            obConversion.SetInAndOutFormats("smi", "xyz")
-
-            mol = openbabel.OBMol()
-            obConversion.ReadString(mol, smiles)
-
-            # -- * Add hydrogen atoms and optimize the 3D geometry
-            mol.AddHydrogens()
-            obConversion.SetOutFormat("xyz")  # -- * Set the output format
-            pybel.Molecule(mol).make3D()  # -- * Use pybel's make3D function to optimize
-
-
-            # -- * Export the molecule manually with a custom header
-            xyz_data = pybel.Molecule(mol).write("xyz")
-            xyz_lines = xyz_data.splitlines()
-            logger.debug(" Debug> {}".format(xyz_lines))
-
-
-            # -- * Export the molecule to a file
-            logger.debug(f"File does not exist, writing from scratch")
-            # output_filename = output
-            # obConversion.WriteFile(mol, output_filename)
-            # obConversion.WriteFile(mol, output_local)
-
-            # -- * Modify the first line to write QUICK settings
-            xyz_lines[0] = "Hello world"
-
-            # Write to file
-            with open(output, "w") as f:
-                f.write("\n".join(xyz_lines) + "\n")
-
-            with open(output_local, "w") as f:
-                f.write("\n".join(xyz_lines) + "\n")
+            gen_conf = create_conformer(smiles,output, param)
+            return gen_conf
 
     except Exception as e:
-        logger.warning(" Error> Unable to save xyz file {}".format(e))
+        logger.warning(" Error> Unable to generate conformer {}".format(e))
         exit(1)
 
 
@@ -150,23 +168,43 @@ def generate_conformer(smiles,output, output_local):
     callback=validate_csv,
 )
 @click.option(
+    "--settings",
+    help="quick settings line",
+    type=click.Path(exists=True),
+    required=True
+)
+@click.option(
     "--cachedir",
     help="custom cache dir to store conformers",
     type=str,
     required=True
 )
-def start_program(input,cachedir):
+@click.option(
+    "--output",
+    help="Output is a csv file that contains the inputs necessary for QUICK",
+    callback=validate_csv,
+    required=True,
+)
+def start_program(input,settings, cachedir, output):
     test = 1
 
     logger.info(" Info>  input {}".format(input))
+    logger.info(" Info>  settings {}".format(settings))
 
-    logger.info(" Info>  cachedir{}".format(cachedir))
-
+    logger.info(" Info>  cachedir {}".format(cachedir))
+    logger.info(" Info> output csv is {}".format(output))
+    # exit(1)
 
     try:
         df = pd.read_csv(input)
         # print(df)
 
+        with open(settings, "r") as f:
+            param = f.readline().strip()  # -- * Reads one line and removes trailing newline
+            logger.debug(" Debug> line is {}".format(param))
+
+        # -- * this will be a list that will contain ID, Name, filepath
+        all_files = []
 
         for index, row in tqdm(df.iterrows(), total=df.shape[0]):
             # print(row)
@@ -183,12 +221,21 @@ def start_program(input,cachedir):
             # -- * Create directory
             os.makedirs(dir_path, exist_ok=True)  # Ensure directory exists
             file_path = os.path.join(dir_path, curr_filename)
-            print(file_path)
+            logger.debug( f" Debug> file to be stored in {file_path}")
 
-            dest_path = os.path.join(os.getcwd(), curr_filename)
 
             # -- * Write molecule
-            generate_conformer(curr_smiles,file_path, dest_path)
+            save_file = generate_conformer(curr_smiles,file_path, param)
+            logger.debug ( ' Debug> ----------------------------------')
+
+            temp_list = [curr_id, curr_name, curr_smiles, file_path]
+            all_files.append(temp_list)
+
+        # -- * Now convert to csv
+        main_df = pd.DataFrame(all_files)
+        main_df.columns = ['ID','NAME','SMILES','FILEPATH']
+
+        main_df.to_csv(output, index=False)
 
         logger.info(" Info> There were no errors")
         exit(0)

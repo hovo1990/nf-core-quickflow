@@ -31,18 +31,20 @@ process generateConformerAdvanced{
 
 
     input:
-        path(csv_input)
+        tuple path(settings_inp), path(csv_input)
 
     output:
-        path("*.xyz")
+        path("${csv_input.simpleName}_modified.csv")
 
 
     script:
-        def i_version=1
+        def i_version=2
     """
         python ${projectDir}/bin/generateConformerAdvanced.py \
                                                         --input=${csv_input} \
-                                                        --cachedir=${launchDir}/customCache/1_conformers
+                                                        --settings=${settings_inp} \
+                                                        --cachedir=${workDir}/customCache \
+                                                        --output="${csv_input.simpleName}_modified.csv"
     """
 }
 

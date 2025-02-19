@@ -58,11 +58,15 @@ workflow QUICKFLOW {
 
     // // -- * Stage 1: generate settings command line
     settings = generateSettingsAdvanced()
-    settings.view()
+    // settings.view()
 
-    // -- ! Version 2
-    // conformers = generateConformerAdvanced(ch_compounds_input)
-    // conformers.view()
+
+    todo = settings.combine(ch_compounds_input)
+    // todo.view()
+
+    // -- ! Version 2, now also pass settings to it
+    conformers = generateConformerAdvanced(todo)
+    conformers.view()
 
 
 
