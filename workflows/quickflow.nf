@@ -47,23 +47,30 @@ workflow QUICKFLOW {
     ch_versions = Channel.empty()
     // println("Hello world!!!!!!")
 
-    // ch_compounds_input.view()
+    ch_compounds_input.view()
 
 
 
-    // -- * Stage 1: Prepare conformers and save xyz
-    conformers = generateConformer(ch_compounds_input)
-    // conformers.view()
 
-    // -- * Stage 2: generate settings command line
-    settings = generateSettings(conformers)
-    // settings.view()
 
-    // //-- * Stage 3: Prepend parameters for quick
-    // //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
-    to_do = settings
-    // to_do.view()
-    preped_input = prepareInput(to_do)
+
+
+
+
+    // -- ! Version 1
+    // // -- * Stage 1: Prepare conformers and save xyz
+    // conformers = generateConformer(ch_compounds_input)
+    // // conformers.view()
+
+    // // -- * Stage 2: generate settings command line
+    // settings = generateSettings(conformers)
+    // // settings.view()
+
+    // // // -- * Stage 3: Prepend parameters for quick
+    // // //-- ? Sort of default: DFT B3LYP BASIS=6-311+G(2d,p) cutoff=1.0e-10 denserms=1.0e-6  GRADIENT DIPOLE OPTIMIZE EXPORT=MOLDEN
+    // to_do = settings
+    // // to_do.view()
+    // preped_input = prepareInput(to_do)
 
 
 
