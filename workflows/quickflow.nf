@@ -51,11 +51,11 @@ workflow QUICKFLOW {
 
 
 
-    //-- * Stage 1: Prepare conformers and save xyz
+    // -- * Stage 1: Prepare conformers and save xyz
     conformers = generateConformer(ch_compounds_input)
     // conformers.view()
 
-    //-- * Stage 2: generate settings command line
+    // -- * Stage 2: generate settings command line
     settings = generateSettings(conformers)
     // settings.view()
 
@@ -64,6 +64,11 @@ workflow QUICKFLOW {
     to_do = settings
     // to_do.view()
     preped_input = prepareInput(to_do)
+
+
+
+
+
 
 
     // // //-- * Stage 4: Quick Calculation
