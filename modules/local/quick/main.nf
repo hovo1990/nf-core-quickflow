@@ -9,7 +9,7 @@ process quickGPU{
 
 
 
-    publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
+    publishDir "${params.outdir}/stage3_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
     //         'biocontainers/gawk:5.3.0' }"
@@ -30,11 +30,6 @@ process quickGPU{
     }
 
 
-
-    // container "${params.singularity_local_container}"
-    // containerOptions " --nv"
-
-    label "process_gpu"
 
 
     input:
@@ -62,7 +57,7 @@ process quickCPU{
 
 
 
-    publishDir "${params.outdir}/stage4_quick_out", mode: 'copy', overwrite: true
+    publishDir "${params.outdir}/stage3_quick_out", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
     //         'biocontainers/gawk:5.3.0' }"
@@ -81,11 +76,6 @@ process quickCPU{
         // containerOptions " --gpus all"
     }
 
-
-    // container "${params.singularity_local_container}"
-    // containerOptions " --nv"
-
-    label "process_full"
 
 
     input:

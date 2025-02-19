@@ -6,7 +6,7 @@ process generateConformerAdvanced{
     label 'low_cpu'
 
 
-    publishDir "${params.outdir}/stage1_generate_conformers", mode: 'copy', overwrite: true
+    publishDir "${params.outdir}/stage2_generate_conformers", mode: 'copy', overwrite: true
     // container  "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_use_local_file ?
     //         ${params.singularity_local_container} :
     //         'biocontainers/gawk:5.3.0' }"
@@ -25,9 +25,6 @@ process generateConformerAdvanced{
         // containerOptions " --gpus all"
     }
 
-
-
-    label "process_low"
 
 
     input:

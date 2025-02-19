@@ -26,10 +26,6 @@ process generateConformer{
     }
 
 
-
-    label "process_low"
-
-
     input:
         tuple val(id), val(smiles), val(name)
 

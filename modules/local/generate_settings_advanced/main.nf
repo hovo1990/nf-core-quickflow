@@ -6,9 +6,10 @@ process generateSettingsAdvanced{
 
 
 
-    publishDir "${params.outdir}/stage2_settings", mode: 'copy', overwrite: true
+    publishDir "${params.outdir}/stage1_settings", mode: 'copy', overwrite: true
 
     beforeScript "hostname"
+
     if ( workflow.containerEngine == 'singularity' && params.singularity_use_local_file  ) {
         container "${params.singularity_local_container}"
         // containerOptions " --nv"
@@ -20,12 +21,6 @@ process generateSettingsAdvanced{
         container "${params.container_link}"
         // containerOptions " --gpus all"
     }
-
-
-
-
-    label "process_low"
-
 
 
 
