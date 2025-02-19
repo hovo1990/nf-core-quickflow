@@ -5,9 +5,9 @@ outdir: /home/<<USERNAME>>/nf-core-quickflow-testout
 # singularity_use_local_file: true
 singularity_pull_docker_container: true
 
-# export: "MOLDEN"
+export: "MOLDEN"
 
-export: "QCSchema"
+# export: "QCSchema"
 
 
 

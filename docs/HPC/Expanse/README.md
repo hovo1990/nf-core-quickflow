@@ -78,7 +78,7 @@ singularity pull docker://docker.io/hgrabski/quick:latest
 ```
 
 after that exit:
-```bash
+```
 exit
 ```
 

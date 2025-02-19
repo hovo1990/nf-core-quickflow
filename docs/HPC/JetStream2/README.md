@@ -1,4 +1,8 @@
-# Create GPU instance in Jetstream2 on Almalinux 9  base image
+# Create a GPU Instance in Jetstream2 (AlmaLinux 9)
+
+## Prerequisites
+
+
 
 ## Setup machine for the pipeline
 
