@@ -87,9 +87,15 @@ workflow PIPELINE_INITIALISATION {
         // }
         .set { ch_samplesheet }
 
+    // -- ? Input file in csv format
+    ch_csvinput  = Channel.fromPath(params.input, checkIfExists: true )
+
+
+
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions
+    originput = ch_csvinput
 }
 
 /*

@@ -68,11 +68,19 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // -- ! Original version: WORKFLOW: Run main workflow
+    //
+    // NFCORE_QUICKFLOW (
+    //     PIPELINE_INITIALISATION.out.samplesheet
+    // )
+
+    // -- * New version version: WORKFLOW: Run main workflow
     //
     NFCORE_QUICKFLOW (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.originput
     )
+
+
 
 
 
