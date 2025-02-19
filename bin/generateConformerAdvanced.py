@@ -21,6 +21,14 @@ import openbabel
 
 from openbabel import openbabel, pybel
 
+
+import shutil
+import pandas as pd
+import os
+import hashlib
+from tqdm.auto import tqdm
+from tqdm.contrib import tzip
+
 def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
     def wrapper(func):
         name = func.__name__
@@ -52,19 +60,67 @@ def timeit(func):
 
     return wrapped
 
-
-def validate_xyz(ctx, param, value):
-    logger.info(" Info> validate_xyz is ", value)
-    if not value.lower().endswith(".xyz"):
-        raise click.BadParameter("File must have a .xyz extension")
-    return value
-
-
 def validate_csv(ctx, param, value):
     logger.info(" Info> validate_csv is ", value)
     if not value.lower().endswith(".csv"):
         raise click.BadParameter("File must have a .csv extension")
     return value
+
+
+
+
+
+
+
+def get_hashed_path(base_dir, filename, levels=2, width=2):
+    """Generate a hashed directory path for a given filename.
+
+    Args:
+        base_dir (str): Root directory for storage.
+        filename (str): Name of the file.
+        levels (int): Number of directory levels.
+        width (int): Characters per level from hash.
+
+    Returns:
+        str: Full directory path.
+    """
+    file_hash = hashlib.md5(filename.encode()).hexdigest()  # Generate a hash
+    subdirs = [file_hash[i * width:(i + 1) * width] for i in range(levels)]
+    return os.path.join(base_dir, *subdirs)
+
+
+
+def generate_conformer(smiles,output, output_local):
+    '''
+        Generate conformer using Pybel
+    '''
+    try:
+
+        # -- * Check if file already exists
+        if os.path.exists(output):
+            logger.debug(f"File already exists: {output}, simply copying")
+            shutil.copy2(output, output_local)
+        else:
+            # -- * Create an OBMol (Open Babel molecule) from the SMILES string
+            obConversion = openbabel.OBConversion()
+            obConversion.SetInAndOutFormats("smi", "xyz")
+
+            mol = openbabel.OBMol()
+            obConversion.ReadString(mol, smiles)
+
+            # -- * Add hydrogen atoms and optimize the 3D geometry
+            mol.AddHydrogens()
+            obConversion.SetOutFormat("xyz")  # Set the output format
+            pybel.Molecule(mol).make3D()  # Use pybel's make3D function to optimize
+
+            # -- * Export the molecule to a file
+            logger.debug(f"File does not exist, writing from scratch")
+            output_filename = output
+            obConversion.WriteFile(mol, output_filename)
+            obConversion.WriteFile(mol, output_local)
+    except Exception as e:
+        logger.warning(" Error> Unable to save xyz file {}".format(e))
+        exit(1)
 
 
 @click.command()
@@ -88,28 +144,50 @@ def start_program(input,cachedir):
 
     logger.info(" Info>  cachedir{}".format(cachedir))
 
-    exit(1)
 
     try:
-        # -- * Create an OBMol (Open Babel molecule) from the SMILES string
-        obConversion = openbabel.OBConversion()
-        obConversion.SetInAndOutFormats("smi", "xyz")
+        df = pd.read_csv(input)
+        # print(df)
 
-        mol = openbabel.OBMol()
-        obConversion.ReadString(mol, smiles)
 
-        # -- * Add hydrogen atoms and optimize the 3D geometry
-        mol.AddHydrogens()
-        obConversion.SetOutFormat("xyz")  # Set the output format
-        pybel.Molecule(mol).make3D()  # Use pybel's make3D function to optimize
+        for index, row in tqdm(df.iterrows(), total=df.shape[0]):
+            # print(row)
 
-        # -- * Export the molecule to a file
-        output_filename = output
-        obConversion.WriteFile(mol, output_filename)
+            curr_id = row['ID']
+            curr_name = row['NAME']
+            curr_smiles = row['SMILES']
+            curr_filename = f'{curr_name}_{curr_id}.xyz'
+
+            # -- * Get hashed  dir path
+            dir_path = get_hashed_path(cachedir, curr_filename )
+            # print(dir_path)
+
+            # -- * Create directory
+            os.makedirs(dir_path, exist_ok=True)  # Ensure directory exists
+            file_path = os.path.join(dir_path, curr_filename)
+            print(file_path)
+
+            dest_path = os.path.join(os.getcwd(), curr_filename)
+
+            # -- * Write molecule
+            generate_conformer(curr_smiles,file_path, dest_path)
+
+        logger.info(" Info> There were no errors")
         exit(0)
     except Exception as e:
-        logger.warning(" Error> Unable to save xyz file {}".format(e))
+        logger.warning(" Error> Processing the files {}".format(e))
         exit(1)
+
+
+    # -- * Check if cache directory available or not
+
+
+    # -- ? Output should look with following format
+    # --output="${name}_${id}.xyz"
+
+
+
+
 
 
 if __name__ == "__main__":
