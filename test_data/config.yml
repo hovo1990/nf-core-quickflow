@@ -5,9 +5,9 @@ outdir: /home/hovakim/GitSync/main/nf-core-quickflow/testOut
 # singularity_use_local_file: true
 singularity_pull_docker_container: true
 
-# export: "MOLDEN"
+export: "MOLDEN"
 
-export: "QCSchema"
+# export: "QCSchema"
 # libxc: function1,function2
 # useGPU: false
 # export: null

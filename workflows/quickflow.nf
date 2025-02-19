@@ -64,9 +64,30 @@ workflow QUICKFLOW {
     todo = settings.combine(ch_compounds_input)
     // todo.view()
 
+    // -- * Stage 2: generate conformers with the new settings
     // -- ! Version 2, now also pass settings to it
     conformers = generateConformerAdvanced(todo)
-    conformers.view()
+    // conformers.view()
+
+
+    // -- * Stage 3:  Quick Calculation
+    todo_quick =   conformers | splitCsv(header:true) \
+                    | map { row-> tuple(row.ID, row.NAME, row.SMILES, file(row.FILEPATH)) }
+    // todo_quick.view()
+
+
+    // -- ? GPU enabled by default, if not run on CPU
+    // -- TODO whre to modify https://github.com/hovo1990/QUICK/blob/master/src/modules/quick_molden_module.f90
+    // -- TODO add QCSchema export in quick
+    if ( params.useGPU ) {
+        quick_out = quickGPU(todo_quick)
+    }
+    else {
+        //-- ! Gives segmentation fault, really
+        //-- TODO discuss with Andy
+        quick_out = quickCPU(todo_quick)
+    }
+
 
 
 

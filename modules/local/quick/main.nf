@@ -38,7 +38,7 @@ process quickGPU{
 
 
     input:
-        path(input)
+        tuple val(ID), val(NAME), val(SMILES), path(input)
 
     output:
         path("${input.simpleName}.out")
@@ -89,7 +89,7 @@ process quickCPU{
 
 
     input:
-        path(input)
+        tuple val(ID), val(NAME), val(SMILES), path(input)
 
     output:
         path("${input.simpleName}.out")
