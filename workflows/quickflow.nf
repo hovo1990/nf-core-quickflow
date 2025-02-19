@@ -51,7 +51,8 @@ workflow QUICKFLOW {
     ch_versions = Channel.empty()
     // println("Hello world!!!!!!")
 
-    ch_compounds_input.view()
+    // -- ? For debug purpose
+    // ch_compounds_input.view()
 
 
 
