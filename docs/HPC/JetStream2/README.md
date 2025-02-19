@@ -2,91 +2,153 @@
 
 ## Prerequisites
 
+- A Jetstream2 account with access to GPU instances.
+- Familiarity with basic Linux commands and SSH.
+- A `g3.large` instance (20GB VRAM) is recommended, though 12GB VRAM should be sufficient.
 
+## Step 1: Launch a GPU Instance
 
-## Setup machine for the pipeline
+1. Log in to the [Jetstream2 portal](https://use.jetstream-cloud.org/).
+2. Select **Launch Instance**.
+3. Choose **AlmaLinux 9** as the base image.
+4. Select a GPU-enabled flavor (`g3.large` recommended).
+5. Configure SSH access.
+6. Start the instance and note the assigned public IP address.
 
-SSH into machine, lets install some modules
+## Step 2: Connect to the Instance
 
-
-make sure to have an g3.large instance (20GB VRAM), generally 12 GB VRAM should be enough
+Use SSH to connect to the instance:
 
 ```bash
-# install apptainer
+ssh your_username@your_instance_ip
+```
+
+## Step 3: Install Required Packages
+
+### 3.1 Install Apptainer
+
+```bash
 sudo dnf install -y epel-release
-sudo dnf install apptainer apptainer-suid libxslt-devel -y
+sudo dnf install -y apptainer apptainer-suid libxslt-devel tmux
+```
 
-# install openjdk
-sudo dnf install java-21-openjdk -y
+### 3.2 Install OpenJDK 21
 
-# switch to open jdk to jdk 21
+```bash
+sudo dnf install -y java-21-openjdk
+```
+
+### 3.3 Set Default Java Version
+
+```bash
 sudo alternatives --config java
+```
 
+Select the option corresponding to **OpenJDK 21**.
 
+### 3.4 Reboot the Machine
 
-# reboot machine
+```bash
 sudo reboot -h now
+```
 
+After the reboot, reconnect using SSH:
 
-# reconnect to the instance
-# install nextflow
+```bash
+ssh your_username@your_instance_ip
+```
+
+## Step 4: Install Nextflow
+
+```bash
 curl -s https://get.nextflow.io | bash
+```
 
-# check if it works
-~/nextflow -v
+Verify installation:
 
+```bash
+nextflow -v
+```
 
+## Step 5: Test GPU Functionality with Apptainer
 
-# let us test if nvidia gpu inside apptainer is working
+### 5.1 Pull the NVIDIA CUDA Image
+
+```bash
 mkdir -p ~/singularity_images
 cd ~/singularity_images
 apptainer pull docker://nvidia/cuda:12.0.1-runtime-ubuntu22.04
+```
 
-# run nvidia-smi using apptainer
+### 5.2 Run `nvidia-smi` Inside the Apptainer Container
+
+```bash
 apptainer run --nv cuda_12.0.1-runtime-ubuntu22.04.sif nvidia-smi
 ```
 
-## Run pipeline
+If everything is set up correctly, this command should display GPU details.
 
+## Step 6: Run the Pipeline
+
+### 6.1 Start a `tmux` Session
 
 ```bash
-# create new tmux session to launch in interactive mode
 tmux new-session -s quickflow
+```
 
+### 6.2 Clone the QuickFlow Repository
 
-
-
-
+```bash
 cd ~
-
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
+```
 
+### 6.3 Set Up the Test Run Environment
 
+```bash
 mkdir -p quickflow-test-run
-cp  -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
-
+cp -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
 cd quickflow-test-run/JetStream2
-#-- * Prepare project NAME
+```
 
+### 6.4 Configure the Project
+
+```bash
 USERNAME=$USER
 sed -i "s|<<USERNAME>>|${USERNAME}|g" jtgpu.sb
 sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
+```
 
-# run workflow
+### 6.5 Run the Workflow
+
+```bash
 export NXF_SINGULARITY_CACHEDIR="/home/$USER/singularity_images"
 export NXF_APPTAINER_CACHEDIR="/home/$USER/singularity_images"
 bash jtgpu.sb
-
-
-# to detach
-
-# to reconnect session
-tmux attach -t quickflow
-
-
-# kill tmux session
-tmux kill-session  -t quickflow
-
-# -- * The output files will be located at nf-core-quickflow-testout folder accoring to config.yml
-
 ```
+
+### 6.6 Manage the `tmux` Session
+
+- To **detach** from the session: Press `Ctrl+B`, then `D`
+- To **reconnect** to the session:
+
+  ```bash
+  tmux attach -t quickflow
+  ```
+
+- To **kill the session**:
+
+  ```bash
+  tmux kill-session -t quickflow
+  ```
+
+## Step 7: Check Output Files
+
+The output files will be located in the `nf-core-quickflow-testout` folder, as specified in `config.yml`.
+
+## Conclusion
+
+You have now successfully launched a GPU instance, installed necessary software, verified GPU functionality, and run a Nextflow pipeline on Jetstream2 using AlmaLinux 9. 🎉
+
+
+
