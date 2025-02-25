@@ -2,7 +2,7 @@ input: compounds.csv
 outdir: testOut
 workDir: workDir
 
-singularity_local_container: /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/singularity_images/quick_latest.sif
+singularity_local_container: <<SINGIMAGES>>/quick_latest.sif
 singularity_use_local_file: true
 # singularity_pull_docker_container: true
 

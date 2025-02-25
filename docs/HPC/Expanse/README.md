@@ -134,6 +134,9 @@ cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
+
+
+
 ### 3.1 Export nf-core-quickflow to environment path
 
 
@@ -155,6 +158,12 @@ cp -R nf-core-quickflow/docs/HPC/Expanse/ quickflow-test-run/
 cd quickflow-test-run/Expanse
 ```
 
+Modify the configuration files with your project details:
+
+```
+sed -i "s|<<SINGIMAGES>|${SINGIMAGES}|g" expanse.sb
+
+```
 
 
 ### Step 5: Run the Workflow
