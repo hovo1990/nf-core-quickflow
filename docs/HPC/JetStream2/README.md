@@ -66,8 +66,20 @@ curl -s https://get.nextflow.io | bash
 
 Verify installation:
 
-```bashexport SINGIMAGES=$(pwd)/singularity_images
+```bash
+nextflow -v
+```
+
+## Step 5: Test GPU Functionality with Apptainer
+
+### 5.1 Pull the NVIDIA CUDA Image
+
+```bash
+mkdir -p ~/singularity_images
+cd ~/singularity_images
 apptainer pull docker://nvidia/cuda:12.0.1-runtime-ubuntu22.04
+cd  ~
+export SINGIMAGES=$(pwd)/singularity_images
 ```
 
 ### 5.2 Run `nvidia-smi` Inside the Apptainer Container
@@ -93,6 +105,15 @@ cd ~
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
+### 6.2.1 Export nf-core-quickflow to environment path
+
+
+```bash
+export QUICKFLOW=$(pwd)/nf-core-quickflow
+export PATH=$QUICKFLOW:$PATH
+```
+
+
 ### 6.3 Set Up the Test Run Environment
 
 ```bash
@@ -101,19 +122,11 @@ cp -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
 cd quickflow-test-run/JetStream2
 ```
 
-### 6.4 Configure the Project
+
+
+### 6.4 Run the Workflow
 
 ```bash
-USERNAME=$USER
-sed -i "s|<<USERNAME>>|${USERNAME}|g" jtgpu.sb
-sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
-```
-
-### 6.5 Run the Workflow
-
-```bash
-export NXF_SINGULARITY_CACHEDIR="/home/$USER/singularity_images"
-export NXF_APPTAINER_CACHEDIR="/home/$USER/singularity_images"
 bash jtgpu.sb
 ```
 

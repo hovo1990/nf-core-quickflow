@@ -1,8 +1,9 @@
 
 export NFX_OPTS="-Xms=512m -Xmx=4g"
-export NXF_SINGULARITY_CACHEDIR="/home/<<USERNAME>>/singularity_images"
-~/nextflow  \
+export NXF_SINGULARITY_CACHEDIR=$SINGIMAGES
+export NXF_APPTAINER_CACHEDIR=$SINGIMAGES
+nextflow  \
     run -profile apptainer \
-    /home/<<USERNAME>>/nf-core-quickflow/main.nf \
+    $QUICKFLOW/main.nf \
     -params-file config.yml  \
     -resume

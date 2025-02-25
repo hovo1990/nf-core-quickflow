@@ -210,7 +210,7 @@ git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
 
-### 6.3 Expoirt nf-core-quickflow to environment path
+### 6.3 Export nf-core-quickflow to environment path
 
 
 ```bash
