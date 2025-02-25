@@ -75,12 +75,13 @@ For more details and further functionality, please refer to the [usage documenta
 
 ### Local machine
 
-[Local machine example](docs/Local/README.md)
+[Local machine](docs/Local/README.md)
 
 
-### Nairr Pilot resources
+### NAIRR Pilot resources
 
 [SDSC Expanse](docs/HPC/Expanse/README.md)
+
 [JetStream2](docs/HPC/JetStream2/README.md)
 
 ## Pipeline output
