@@ -1,0 +1,15 @@
+ID,SMILES,NAME
+CID702,CCO,Ethanol
+CID887,CO,Methanol
+CID3776,CC(C)O,Isopropyl
+C1,CCC,Cust1
+C2,CCCC,Cust2
+C3,CCCCC,Cust3
+C4,O,water
+C5,CC,cust4
+C6,CCF,cust5
+C7,C,cust6
+C8,C=C,cust7
+C9,C#C,cust9
+C10,CCCF,cust10
+C11,CCCCCF,cust11
