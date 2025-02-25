@@ -26,6 +26,8 @@ module load singularitypro/3.11
 ```bash
 cd ~
 curl -s https://get.nextflow.io | bash
+export NEXTFLOW=$(pwd)/nextflow
+export PATH=$NEXTFLOW:$PATH
 ```
 
 
@@ -132,6 +134,17 @@ cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
+### 3.1 Export nf-core-quickflow to environment path
+
+
+```bash
+export MAINPATH=/expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME/
+export SINGIMAGES=$MAINPATH/singularity_images
+export QUICKFLOW=$MAINPATH/nf-core-quickflow
+export PATH=$QUICKFLOW:$PATH
+```
+
+
 
 ### Step 4: Prepare Configuration Files
 
@@ -144,26 +157,7 @@ cd quickflow-test-run/Expanse
 
 
 
-
-Modify the configuration files with your project details:
-
-```
-sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" expanse.sb
-sed -i "s|<<USERNAME>>|${USERNAME}|g" expanse.sb
-sed -i "s|<<YOUREMAIL>>|${YOUREMAIL}|g" expanse.sb
-
-sed -i "s|<<EXPANSEPROJECT>>|${EXPANSEPROJECT}|g" config.yml
-sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
-```
-
-### Step 5: Set Environment Variables
-```bash
-
-export NXF_SINGULARITY_CACHEDIR="/expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME/singularity_images"
-export NXF_APPTAINER_CACHEDIR="/expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME/singularity_images"
-```
-
-### Step 6: Run the Workflow
+### Step 5: Run the Workflow
 ```bash
 bash expanse.sb
 ```

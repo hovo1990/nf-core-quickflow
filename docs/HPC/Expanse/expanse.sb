@@ -25,12 +25,13 @@ module load  openjdk/11.0.12_7/xkfgsx7
 module load singularitypro/3.11
 
 export NFX_OPTS="-Xms=512m -Xmx=4g"
-export NXF_SINGULARITY_CACHEDIR="/expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/singularity_images"
-~/nextflow  \
+export NXF_SINGULARITY_CACHEDIR=$SINGIMAGES
+export NXF_APPTAINER_CACHEDIR=$SINGIMAGES
+$NEXTFLOW  \
     run -profile expanse \
-    /expanse/lustre/projects/<<EXPANSEPROJECT>>/<<USERNAME>>/nf-core-quickflow/main.nf \
+    $QUICKFLOW/main.nf \
     -params-file config.yml  \
-    --project "<<EXPANSEPROJECT>>" \
+    --project $EXPANSEPROJECT \
     -resume \
-    -N <<YOUREMAIL>>
+    -N $YOUREMAIL
 
