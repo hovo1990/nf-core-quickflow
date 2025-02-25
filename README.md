@@ -70,6 +70,19 @@ nextflow run nf-core/quickflow \
 
 For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/quickflow/usage) and the [parameter documentation](https://nf-co.re/quickflow/parameters).
 
+
+## Example on how to run on different environments
+
+### Local machine
+
+[Local machine example](docs/Local/README.md)
+
+
+### Nairr Pilot resources
+
+[SDSC Expanse](docs/HPC/Expanse/README.md)
+[JetStream2](docs/HPC/JetStream2/README.md)
+
 ## Pipeline output
 
 To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/quickflow/results) tab on the nf-core website pipeline page.
