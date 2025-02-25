@@ -110,9 +110,9 @@ tmux kill-session -t quickflow
 
 Set up your project name, username and email,so nextflow will send a notification:
 ```bash
-EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
-USERNAME=$USER
-YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"
+export EXPANSEPROJECT='YOUR_PROJECT_NAME_ON_EXPANSE'
+export USERNAME=$USER
+export YOUREMAIL="YOUR_EMAIL_FOR_NOTIFICATION"
 ```
 
 
@@ -161,7 +161,7 @@ cd quickflow-test-run/Expanse
 Modify the configuration files with your project details:
 
 ```
-sed -i "s|<<SINGIMAGES>|${SINGIMAGES}|g" expanse.sb
+sed -i "s|<<SINGIMAGES>>|${SINGIMAGES}|g" config.yml
 
 ```
 
