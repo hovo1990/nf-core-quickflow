@@ -66,17 +66,7 @@ curl -s https://get.nextflow.io | bash
 
 Verify installation:
 
-```bash
-nextflow -v
-```
-
-## Step 5: Test GPU Functionality with Apptainer
-
-### 5.1 Pull the NVIDIA CUDA Image
-
-```bash
-mkdir -p ~/singularity_images
-cd ~/singularity_images
+```bashexport SINGIMAGES=$(pwd)/singularity_images
 apptainer pull docker://nvidia/cuda:12.0.1-runtime-ubuntu22.04
 ```
 

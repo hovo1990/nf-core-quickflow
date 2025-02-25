@@ -75,10 +75,9 @@ docker run hello-world
 
 ```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-```
+  && curl -s -L https://nvidia.github.io/liexport NXF_SINGULARITY_CACHEDIR="/home/$USER/singularity_images"
+export NXF_APPTAINER_CACHEDIR="/home/$USER/singularity_images"
+bash jtgpu.sb
 
 ### 3.7: Update the packages list
 
@@ -151,6 +150,25 @@ sudo apt install -y apptainer
 ```
 
 
+#### Step 3.11.1: Test GPU Functionality with Apptainer
+
+##### 3.11.1.1 Pull the NVIDIA CUDA Image
+
+```bash
+mkdir -p ~/singularity_images
+cd ~/singularity_images
+apptainer pull docker://nvidia/cuda:12.0.1-runtime-ubuntu22.04
+cd  ~
+export SINGIMAGES=$(pwd)/singularity_images
+```
+
+### 3.11.1.2  Run `nvidia-smi` Inside the Apptainer Container
+
+```bash
+apptainer run --nv cuda_12.0.1-runtime-ubuntu22.04.sif nvidia-smi
+```
+
+If everything is set up correctly, this command should display GPU details.
 
 
 
@@ -160,11 +178,7 @@ sudo apt install -y apptainer
 sudo reboot -h now
 ```
 
-After the reboot, reconnect using SSH:
 
-```bash
-ssh your_username@your_instance_ip
-```
 
 ## Step 4: Install Nextflow
 
@@ -178,23 +192,7 @@ Verify installation:
 nextflow -v
 ```
 
-## Step 5: Test GPU Functionality with Apptainer
 
-### 5.1 Pull the NVIDIA CUDA Image
-
-```bash
-mkdir -p ~/singularity_images
-cd ~/singularity_images
-apptainer pull docker://nvidia/cuda:12.0.1-runtime-ubuntu22.04
-```
-
-### 5.2 Run `nvidia-smi` Inside the Apptainer Container
-
-```bash
-apptainer run --nv cuda_12.0.1-runtime-ubuntu22.04.sif nvidia-smi
-```
-
-If everything is set up correctly, this command should display GPU details.
 
 ## Step 6: Run the Pipeline
 
@@ -211,31 +209,80 @@ cd ~
 git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
+
+### 6.3 Expoirt nf-core-quickflow to environment path
+
+
+```bash
+export QUICKFLOW=$(pwd)/nf-core-quickflow
+export PATH=$QUICKFLOW:$PATH
+```
+
 ### 6.3 Set Up the Test Run Environment
 
 ```bash
+cd ~
 mkdir -p quickflow-test-run
-cp -R nf-core-quickflow/docs/HPC/JetStream2/ quickflow-test-run/
-cd quickflow-test-run/JetStream2
+cp -R nf-core-quickflow/docs/Local quickflow-test-run/
+cd quickflow-test-run/Local
 ```
 
-### 6.4 Configure the Project
+
+
+### 6.5 Run the Workflow using Docker
+
+### 6.5.1 Setting up Java options
 
 ```bash
-USERNAME=$USER
-sed -i "s|<<USERNAME>>|${USERNAME}|g" jtgpu.sb
-sed -i "s|<<USERNAME>>|${USERNAME}|g" config.yml
+export NFX_OPTS="-Xms=512m -Xmx=4g"
 ```
 
-### 6.5 Run the Workflow
+1. export: Sets an environment variable available to processes started from this shell.
+2. NFX_OPTS: A variable used by Nextflow to define Java options.
+3. -Xms=512m: Sets the initial memory allocation for the Java Virtual Machine (JVM) to 512 megabytes.
+4. -Xmx=4g: Sets the maximum memory allocation for the JVM to 4 gigabytes.
+
+
+### 6.5.2 Run pipeline
 
 ```bash
-export NXF_SINGULARITY_CACHEDIR="/home/$USER/singularity_images"
-export NXF_APPTAINER_CACHEDIR="/home/$USER/singularity_images"
-bash jtgpu.sb
+nextflow  \
+    run -profile docker \
+    $QUICKFLOW/main.nf \
+    -params-file config.yml  \
+    -resume
+
+```
+1. nextflow: Runs the Nextflow executable located in the home directory (~).
+2. run: A command telling Nextflow to start a pipeline.
+3. -profile docker: Specifies that the pipeline should run using Docker containers. This ensures a consistent environment.
+4. $QUICKFLOW/main.nf: Path to the main Nextflow script.
+5. -params-file config.yml: Specifies a YAML file (config.yml) containing input parameters and configurations for the pipeline.
+6. -resume: Tells Nextflow to continue from where it left off if the pipeline was previously interrupted, avoiding restarting completed steps.
+
+
+
+### 6.6 Run the Workflow using Apptainer/Singularity
+
+
+```bash
+export NXF_SINGULARITY_CACHEDIR=$SINGIMAGES
+export NXF_APPTAINER_CACHEDIR=$SINGIMAGES
 ```
 
-### 6.6 Manage the `tmux` Session
+```bash
+export NFX_OPTS="-Xms=512m -Xmx=4g"
+nextflow  \
+    run -profile apptainer \
+    $QUICKFLOW/main.nf  \
+    -params-file config.yml  \
+    -resume
+```
+
+
+
+
+### 6.7  Manage the `tmux` Session
 
 - To **detach** from the session: Press `Ctrl+B`, then `D`
 - To **reconnect** to the session:
