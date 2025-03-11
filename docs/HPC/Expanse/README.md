@@ -131,7 +131,7 @@ module load singularitypro/3.11
 
 ```
 cd /expanse/lustre/projects/$EXPANSEPROJECT/$USERNAME
-git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
+git clone https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
 

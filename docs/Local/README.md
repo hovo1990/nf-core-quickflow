@@ -206,7 +206,7 @@ tmux new-session -s quickflow
 
 ```bash
 cd ~
-git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
+git clone  https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
 

@@ -102,7 +102,7 @@ tmux new-session -s quickflow
 
 ```bash
 cd ~
-git clone -b dev https://github.com/hovo1990/nf-core-quickflow.git
+git clone https://github.com/hovo1990/nf-core-quickflow.git
 ```
 
 ### 6.2.1 Export nf-core-quickflow to environment path
